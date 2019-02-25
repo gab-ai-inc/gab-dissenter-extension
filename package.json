@@ -3,6 +3,12 @@
     "version": "0.1.0",
     "main": "index.js",
     "scripts": {
+        "gulp:images": "gulp images",
+        "gulp:scripts": "gulp scripts",
+        "gulp:styles": "gulp styles",
+        "gulp:html": "gulp html",
+        "gulp:manifest": "gulp manifest",
+        "build": "gulp build"
     },
     "devDependencies": {
         "autoprefixer": "^9.4.7",
