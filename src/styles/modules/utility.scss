@@ -1,0 +1,43 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: none;
+    box-sizing: border-box;
+}
+
+::-moz-selection {
+    color: #fff;
+    background: #78e8b2;
+}
+
+::selection {
+    color: #fff;
+    background: #78e8b2;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.abs {
+    position: absolute;
+
+    &--full {
+        @include abs-position(0,0,0,0);
+    }
+}
+
+.rel {
+    position: relative;
+
+    &--full {
+        height: 100%;
+        width: 100%;
+    }
+
+    &--viewport {
+        height: 100vh;
+        width: 100vw;
+    }
+}

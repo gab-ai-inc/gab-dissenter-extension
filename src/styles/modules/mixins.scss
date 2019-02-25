@@ -1,0 +1,13 @@
+/// Position absolute on page
+/// @example scss
+///    @include abs-position(125px, auto, 50px, 15px);
+/// @param {Number} $top [default: auto]
+/// @param {Number} $right [default: auto]
+/// @param {Number} $bottom [default: auto]
+/// @param {Number} $left [default: auto]
+@mixin abs-position($top: auto, $right: auto, $bottom: auto, $left: auto) {
+    top: $top;
+    left: $left;
+    bottom: $bottom;
+    right: $right;
+}
