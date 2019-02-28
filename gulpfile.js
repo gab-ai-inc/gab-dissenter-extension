@@ -9,6 +9,18 @@ const manifest = require('./config/manifest');
 
 //
 
+/**
+ * @description - Helper to set value in object with path
+ */
+function setObjectValueWithPath(object, path, value) {
+    let keys = path.split('.');
+    let last = keys.pop();
+
+    keys.reduce(function(o, k) {
+        return o[k] = o[k] || {};
+    }, object)[last] = value;
+};
+
 
 /**
  * @description - Create gulp task 'styles'
@@ -168,7 +180,11 @@ gulp.task('manifest', () => {
             str = str.replace(/__CONTEXT_MENUS__/g, browser.scriptVariableMap.CONTEXT_MENUS);
 
             let thisManifest = JSON.parse(str);
-            thisManifest = Object.assign(browser.manifestMap, thisManifest);
+
+            for (let key in browser.manifestMap) {
+                let value = browser.manifestMap[key];
+                setObjectValueWithPath(thisManifest, key, value);
+            };
 
             let promise = new Promise(function(resolve, reject) {
                 fs.writeFile(`${path}/manifest.json`, JSON.stringify(thisManifest), function(err) {
