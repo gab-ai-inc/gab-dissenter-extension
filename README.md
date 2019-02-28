@@ -7,6 +7,7 @@ For more information, please visit: https://dissenter.com
 # • Installation
 
 Latest versions:
+
 | Browser | Version |
 | --- | --- |
 Chrome | v0.1.1 |
