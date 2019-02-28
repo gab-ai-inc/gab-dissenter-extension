@@ -39,6 +39,7 @@ const edge = new Browser({
         MESSENGER: 'runtime',
     },
     manifestMap: {
+        "background.persistent": false,
     },
 });
 
