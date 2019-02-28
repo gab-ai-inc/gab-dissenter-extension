@@ -5,7 +5,7 @@ const Browser = require('./browser');
 const chrome = new Browser({
     name: 'Google Chrome',
     slug: 'chrome',
-    version: '0.1.0',
+    version: '0.1.1',
     scriptVariableMap: {
         BROWSER: 'chrome',
         MESSENGER: 'extension',
@@ -33,7 +33,7 @@ const firefox = new Browser({
 const edge = new Browser({
     name: 'Microsoft Edge',
     slug: 'edge',
-    version: '0.1.0',
+    version: '0.1.1',
     scriptVariableMap: {
         BROWSER: 'browser',
         MESSENGER: 'runtime',
