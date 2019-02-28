@@ -14,7 +14,8 @@ const chrome = new Browser({
         "background.persistent": false,
         "incognito": "not_allowed",
         "offline_enabled": false,
-        "version_name": "0.1.0",
+        "version_name": "0.1.1",
+        "version": "0.1.1",
     },
 });
 
@@ -27,6 +28,7 @@ const firefox = new Browser({
         MESSENGER: 'runtime',
     },
     manifestMap: {
+        "version": "0.1.0",
     },
 });
 
@@ -40,6 +42,7 @@ const edge = new Browser({
     },
     manifestMap: {
         "background.persistent": false,
+        "version": "0.1.1",
     },
 });
 

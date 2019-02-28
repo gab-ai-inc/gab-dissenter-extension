@@ -4,7 +4,6 @@ module.exports = manifest = {
     "short_name": "Dissenter",
     "description": "Dissenter is the comment section of the Internet.",
     "homepage_url": "https://dissenter.com",
-    "version": "0.1.0",
     "icons": {
         "16": "assets/images/logo/icon-16.png",
         "48": "assets/images/logo/icon-48.png",
