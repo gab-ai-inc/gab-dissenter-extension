@@ -6,7 +6,13 @@ For more information, please visit: https://dissenter.com
 
 # • Installation
 
-Latest version: 0.1.0
+Latest versions:
+| Browser | Version |
+| --- | --- |
+Chrome | v0.1.1 |
+Edge | v0.1.1 |
+Firefox | v0.1.0 |
+Safari | v0.1.0 |
 
 This extension only requires developer dependencies.
 
