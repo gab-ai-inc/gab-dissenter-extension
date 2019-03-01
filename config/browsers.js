@@ -19,6 +19,23 @@ const chrome = new Browser({
     },
 });
 
+const opera = new Browser({
+    name: 'Opera',
+    slug: 'opera',
+    version: '0.1.1',
+    scriptVariableMap: {
+        BROWSER: 'chrome',
+        MESSENGER: 'extension',
+    },
+    manifestMap: {
+        "background.persistent": false,
+        "incognito": "not_allowed",
+        "offline_enabled": false,
+        "version_name": "0.1.1",
+        "version": "0.1.1",
+    },
+});
+
 const firefox = new Browser({
     name: 'Mozilla Firefox',
     slug: 'firefox',
@@ -65,6 +82,7 @@ const Browsers = [
     firefox,
     edge,
     safari,
+    opera,
 ];
 
 module.exports = Browsers;
