@@ -41,7 +41,7 @@ gulp.task('styles', function () {
         return new Promise((resolve, reject) => {
             gulp
                 .src([
-                    'src/styles/index.scss',
+                    'src/styles/global.scss',
                     `src/styles/components/${fileName}.scss`,
                 ])
                 .pipe(wait(500))
