@@ -35,14 +35,14 @@ const firefox = new Browser({
 const edge = new Browser({
     name: 'Microsoft Edge',
     slug: 'edge',
-    version: '0.1.1',
+    version: '0.1.2',
     scriptVariableMap: {
         BROWSER: 'browser',
         MESSENGER: 'runtime',
     },
     manifestMap: {
         "background.persistent": false,
-        "version": "0.1.1",
+        "version": "0.1.2",
         "author": "Gab.com",
     },
 });

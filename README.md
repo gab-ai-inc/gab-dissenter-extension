@@ -11,7 +11,7 @@ Latest versions:
 | Browser | Version |
 | --- | --- |
 Chrome | v0.1.1 |
-Edge | v0.1.1 |
+Edge | v0.1.2 |
 Firefox | v0.1.0 |
 Safari | v0.1.0 |
 
