@@ -7,20 +7,15 @@
     min-height: 600px;
     overflow: hidden;
     color: #000;
+    background-color: #fff;
 
-    &__inner {
+    * {
         display: block;
         height: 600px;
         width: 420px;
-        background-image: url('../assets/images/icons/spinner.gif');
-        background-repeat: no-repeat;
-        background-size: 60px 60px;
-        background-position: center;
     }
 
-    &__iframe {
-        display: block;
-        height: 600px;
-        width: 420px;
+    &__inner {
+        background: url(../assets/images/icons/spinner.gif) no-repeat center / 60px 60px;
     }
 }
