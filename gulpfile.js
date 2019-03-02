@@ -35,6 +35,7 @@ gulp.task('styles', function () {
     const postcss = require('gulp-postcss');
     const autoprefixer = require('autoprefixer');
     const wait = require('gulp-wait');
+    const insert = require('gulp-insert');
 
     function getPromise(fileName, savePath) {
         return new Promise((resolve, reject) => {
@@ -48,6 +49,7 @@ gulp.task('styles', function () {
                 .pipe(sass())
                 .pipe(postcss([autoprefixer()]))
                 .pipe(cleanCSS())
+                .pipe(insert.prepend(`/* Automatically generated file. Do not edit directly.\nCopyright (C) 2019 Gab AI, Inc.\nAll Rights Reserved */\n`))
                 .pipe(gulp.dest(`${savePath}/${fileName}`))
                 .on('error', err => {
                     reject(err);
@@ -127,6 +129,7 @@ gulp.task('scripts', () => {
                         toplevel: true,
                     },
                 }))
+                .pipe(insert.prepend(`/* Automatically generated file. Do not edit directly.\nCopyright (C) 2019 Gab AI, Inc.\nAll Rights Reserved */\n`))
                 .pipe(gulp.dest(`${savePath}/${fileName}`))
                 .on('error', err => {
                     reject(err);
@@ -206,6 +209,7 @@ gulp.task('manifest', () => {
 gulp.task('html', () => {
     const pug = require('gulp-pug');
     const replace = require('gulp-replace');
+    const insert = require('gulp-insert');
 
     function getPromise(fileName, browser) {
         return new Promise((resolve, reject) => {
@@ -217,6 +221,7 @@ gulp.task('html', () => {
                     name: `${fileName}.html`,
                     verbose: true,
                 }))
+                .pipe(insert.prepend(`<!-- Automatically generated file. Do not edit directly.\nCopyright (C) 2019 Gab AI, Inc.\nAll Rights Reserved -->\n`))
                 .pipe(gulp.dest(`${browser.path}/${fileName}`))
                 .on('error', err => {
                     reject(err);
