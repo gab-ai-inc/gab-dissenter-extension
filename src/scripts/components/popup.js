@@ -69,12 +69,17 @@ var Popup = function() {
                 //Get active tab
                 var activeTab = tabs[0] || {};
 
-                //Get title, url
-                var title = activeTab.title || '';
-                var url = activeTab.url || '';
+                // check if a canonical url is defined before using the tab url
+                __BROWSER__.tabs.executeScript({
+                    code: "try { document.querySelector('link[rel=\"canonical\"]').href; } catch(e) {}"
+                }, function(result) {
+                    //Get title, url
+                    var title = activeTab.title || '';
+                    var url = result[0] || activeTab.url || '';
 
-                //
-                onPopupOpen(title, url);
+                    //
+                    onPopupOpen(title, url);
+                });
             });
         }
     }
