@@ -50,13 +50,26 @@ var Popup = function() {
            var activeWindow = safari.application.activeBrowserWindow;
            var activeTab = activeWindow.activeTab;
 
-           if (!isObject(activeTab)) activeTab = {};
+           var _loadPopup = function(e) {
+               var title = e.target.title || '';
+               var url = e.target.url || '';
 
-           var title = activeTab.title || '';
-           var url = activeTab.url || '';
+               if (url) {
+                   onPopupOpen(title, url);
+               }
+           };
 
-           //
-           onPopupOpen(title, url);
+           activeWindow.addEventListener('activate', function(e) {
+               if (e.target.hasOwnProperty('url')) {
+                   _loadPopup(e);
+
+                   e.target.addEventListener('navigate', function(e) {
+                       if (e.target.hasOwnProperty('url')) {
+                           _loadPopup(e);
+                       }
+                   });
+               }
+           }, true);
        }
        else {
             //On popup open, get current tab
@@ -69,12 +82,17 @@ var Popup = function() {
                 //Get active tab
                 var activeTab = tabs[0] || {};
 
-                //Get title, url
-                var title = activeTab.title || '';
-                var url = activeTab.url || '';
+                // check if a canonical url is defined before using the tab url
+                __BROWSER__.tabs.executeScript({
+                    code: "try { document.querySelector('link[rel=\"canonical\"]').href; } catch(e) {}"
+                }, function(result) {
+                    //Get title, url
+                    var title = activeTab.title || '';
+                    var url = result[0] || activeTab.url || '';
 
-                //
-                onPopupOpen(title, url);
+                    //
+                    onPopupOpen(title, url);
+                });
             });
         }
     }
