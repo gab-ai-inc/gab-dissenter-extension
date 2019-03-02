@@ -48,14 +48,26 @@ var Popup = function() {
     scope.init = function() {
         if (BROWSER_CONFIG.slug === BROWSER_SAFARI_SLUG) {
            var activeWindow = safari.application.activeBrowserWindow;
+           var activeTab = activeWindow.activeTab;
+
+           var _loadPopup = function(e) {
+               var title = e.target.title || '';
+               var url = e.target.url || '';
+
+               if (url) {
+                   onPopupOpen(title, url);
+               }
+           };
 
            activeWindow.addEventListener('activate', function(e) {
                if (e.target.hasOwnProperty('url')) {
-                   var title = e.target.title || '';
-                   var url = e.target.url || '';
+                   _loadPopup(e);
 
-                   //
-                   onPopupOpen(title, url);
+                   e.target.addEventListener('navigate', function(e) {
+                       if (e.target.hasOwnProperty('url')) {
+                           _loadPopup(e);
+                       }
+                   });
                }
            }, true);
        }
