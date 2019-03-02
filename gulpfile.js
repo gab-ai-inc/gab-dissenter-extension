@@ -108,7 +108,14 @@ gulp.task('scripts', () => {
     const insert = require('gulp-insert');
 
     function getPromise(fileName, findPath, browser, pathSuffix) {
-        let browserConfig = JSON.stringify(browser);
+        //Clone browser for browserConfig
+        let browserConfig = JSON.parse(JSON.stringify(browser));
+        //Remove scriptVariableMap, manifestMap from browserConfig
+        delete browserConfig['scriptVariableMap'];
+        delete browserConfig['manifestMap'];
+        //Stringify again
+        browserConfig = JSON.stringify(browserConfig);
+
         let savePath = browser.path;
         if (pathSuffix) savePath += `/${pathSuffix}`;
 
