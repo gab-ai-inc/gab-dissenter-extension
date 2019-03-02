@@ -48,15 +48,16 @@ var Popup = function() {
     scope.init = function() {
         if (BROWSER_CONFIG.slug === BROWSER_SAFARI_SLUG) {
            var activeWindow = safari.application.activeBrowserWindow;
-           var activeTab = activeWindow.activeTab;
 
-           if (!isObject(activeTab)) activeTab = {};
+           activeWindow.addEventListener('activate', function(e) {
+               if (e.target.hasOwnProperty('url')) {
+                   var title = e.target.title || '';
+                   var url = e.target.url || '';
 
-           var title = activeTab.title || '';
-           var url = activeTab.url || '';
-
-           //
-           onPopupOpen(title, url);
+                   //
+                   onPopupOpen(title, url);
+               }
+           }, true);
        }
        else {
             //On popup open, get current tab
