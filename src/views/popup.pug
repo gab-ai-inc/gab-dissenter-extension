@@ -1,15 +1,11 @@
 doctype html
-
 html
 	head
 		title Dissenter
 		meta(charset="utf-8")
 		link(href='./popup.css' type='text/css' rel='stylesheet')
-
-
 	body
-		div(id='popup' class='popup background-color--x1')
+		div(class='popup')
 			div(class='popup__inner rel')
-				iframe(id='popup-iframe' src='' class='popup__iframe abs hidden')
-				
+				iframe(id='popup-iframe' class='popup__iframe abs hidden')
 		script(src='./popup.js')
