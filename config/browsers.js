@@ -43,6 +43,7 @@ const edge = new Browser({
     manifestMap: {
         "background.persistent": false,
         "version": "0.1.1",
+        "author": "Gab.com",
     },
 });
 
