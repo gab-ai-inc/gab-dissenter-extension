@@ -23,7 +23,6 @@ var Sidebar = function () {
    * @param  {String} url - Active tab title
    */
   function onSidebarOpen(title, url) {
-    console.log("sidebar opened")
     //Set global
     currentTabUrl = url;
 
@@ -73,25 +72,6 @@ var Sidebar = function () {
 
         tabManager.panelTab = activeTab.id;
         tabManager.activeTab = activeTab.id;
-
-        //Save panel parent ID
-        function sendParentPanel(e) {
-          var parentPanel = tabManager.panelTab;
-          console.log("this is what im sending:",parentPanel);
-          var sending = __BROWSER__.runtime.sendMessage({parentPanel:parentPanel});
-          sending.then(handleResponse, handleError);
-        }
-
-        function handleResponse(message) {
-          console.log("Message from the background script:" + message);
-        }
-
-        function handleError(error) {
-          console.log("Error: " + error);
-        }
-
-        sendParentPanel();
-
         //
 
         onSidebarOpen(title, url);
@@ -110,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-function handleActivated(activeInfo) {
+function handleActivated() {
   setTimeout(function () {
     localInit()
   },2000);
@@ -121,24 +101,6 @@ function handleActivated(activeInfo) {
 
   __BROWSER__.tabs.query({lastFocusedWindow: true, active: true}, function (tabs) {
     tabManager.activeTab = tabs[0].id;
-
-    var currentTab = tabs[0].id;
-
-    function sendParentQuestion(e) {
-      var parentSuspect = currentTab;
-      var sending = __BROWSER__.runtime.sendMessage({parentSuspect:parentSuspect});
-      sending.then(handleResponse, handleError);
-    }
-
-    function handleResponse(message) {
-      console.log("Message from the background script:" + message);
-    }
-
-    function handleError(error) {
-      console.log("Error: " + error);
-    }
-
-    sendParentQuestion()
   })
 
 }
