@@ -7,39 +7,43 @@ var Popup = function() {
     var scope = this;
 
     //Elements
-    var body = document.body;
-    var container = document.getElementById('popup');
     var iframe = document.getElementById('popup-iframe');
 
+    var currentActiveUrl = '';
 
-    //Set on every popup open
-    var currentTabUrl = '';
-
-
-    //Functions
-
+    //Global functions
 
     /**
      * @description - On Popup open
-     * @param  {string} title - Active tab title
-     * @param  {String} url - Active tab title
+     * @function scope.init
+     * @param  {Object} activeTab - Active tab object
+     * @param  {String} activeTab.title - Active tab title
+     * @param  {String} activeTab.url - Active tab title
      */
-    function onPopupOpen(title, url) {
-        //Set global
-        currentTabUrl = url;
-        
-        setTimeout(function() {
-            var encoded = encodeURIComponent(url);
-            var commentUrl = BASE_URI + encoded;
+    scope.onPopupOpen = function(activeTab) {
+        //Must be object
+        if (!isObject(activeTab)) return false;
 
+        //Get title, url
+        var title = activeTab['title'] || '';
+        var url = activeTab['url'] || '';
+
+        //If same as currently active, don't reload
+        if (currentActiveUrl === url) return false;
+        //Set currently active if different
+        currentActiveUrl = url;
+
+        //Encode current tab url along with base dissenter.com url
+        var encoded = encodeURIComponent(url);
+        var commentUrl = BASE_URI + encoded;
+
+        //Show iframe after delay
+        setTimeout(function() {
+            //Set src, make visible
             iframe.setAttribute('src', commentUrl);
             iframe.classList.remove('hidden');
         }, 250);
     };
-
-
-    //Global functions
-
 
     /**
      * @description - Init popup on open
@@ -50,13 +54,7 @@ var Popup = function() {
            var activeWindow = safari.application.activeBrowserWindow;
            var activeTab = activeWindow.activeTab;
 
-           if (!isObject(activeTab)) activeTab = {};
-
-           var title = activeTab.title || '';
-           var url = activeTab.url || '';
-
-           //
-           onPopupOpen(title, url);
+           scope.onPopupOpen(activeTab);
        }
        else {
             //On popup open, get current tab
@@ -64,20 +62,14 @@ var Popup = function() {
                 active: true,
                 currentWindow: true
             }, function(tabs) {
-                if (!tabs) return false;
+                if (!tabs || !isArray(tabs)) return false;
 
-                //Get active tab
-                var activeTab = tabs[0] || {};
+                var activeTab = tabs[0];
 
-                //Get title, url
-                var title = activeTab.title || '';
-                var url = activeTab.url || '';
-
-                //
-                onPopupOpen(title, url);
+                scope.onPopupOpen(activeTab);
             });
         }
-    }
+    };
 };
 
 /**
