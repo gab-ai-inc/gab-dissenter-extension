@@ -11,8 +11,14 @@ module.exports = manifest = {
     },
     "permissions": [
         "activeTab",
-        "https://*.dissenter.com/*"
+        "tabs",
+        "https://*.dissenter.com/*",
     ],
+    "sidebar_action": {
+      "default_title": "Dissenter Bar",
+      "default_panel": "sidebar/sidebar.html",
+      "default_icon": "assets/images/logo/icon-128.png"
+    },
     "browser_action": {
         "default_icon": "assets/images/logo/icon-128.png",
         "default_popup": "popup/popup.html"
@@ -27,7 +33,8 @@ module.exports = manifest = {
     },
     "background": {
         "scripts": [
-            "background/background.js"
+            "background/background.js",
+            "background/manager.js"
         ]
     },
     "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self' https://*.dissenter.com/*"

@@ -1,0 +1,32 @@
+/*================================================
+    Sidebar
+================================================*/
+.sidebar {
+  display: block;
+  min-width: 100%;
+  min-height: 100vh;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  color: #000;
+
+  &__inner {
+    display: block;
+    height: 100%;
+    width: 100%;
+    min-width: 100%;
+    min-height: 100vh;
+    background-image: url('../assets/images/icons/spinner.gif');
+    background-repeat: no-repeat;
+    background-size: 60px 60px;
+    background-position: center;
+  }
+
+  &__iframe {
+    display: block;
+    height: 100%;
+    width: 100%;
+    min-width: 100%;
+    min-height: 100vh;
+  }
+}
