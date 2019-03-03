@@ -13,7 +13,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.1.0</string>
+	<string>0.1.1</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>Chrome</key>
@@ -34,8 +34,6 @@
 		<key>Toolbar Items</key>
 		<array>
 			<dict>
-				<key>Command</key>
-				<string>open_popup</string>
 				<key>Identifier</key>
 				<string>toolbaritem</string>
 				<key>Image</key>
