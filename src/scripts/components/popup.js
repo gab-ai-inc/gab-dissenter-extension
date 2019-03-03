@@ -55,6 +55,16 @@ var Popup = function() {
            var activeTab = activeWindow.activeTab;
 
            scope.onPopupOpen(activeTab);
+
+           /**
+            * @description - Event listener for popover
+            */
+           safari.application.addEventListener("popover", function(event) {
+               //Check if currentActiveUrl is not the page we're on. If not, reload popover
+               if (currentActiveUrl !== activeTab['url']) {
+                   safari.extension.popovers[0].contentWindow.location.reload();
+               }
+           }, true);
        }
        else {
             //On popup open, get current tab
@@ -72,11 +82,18 @@ var Popup = function() {
     };
 };
 
-/**
- * @description - On popup load
- */
-document.addEventListener('DOMContentLoaded', function() {
-    //Create and init Popup
+if (BROWSER_CONFIG.slug === BROWSER_SAFARI_SLUG) {
+    //Init popup on load for Safari
     var popup = new Popup();
     popup.init();
-});
+}
+else {
+    /**
+     * @description - On popup load
+     */
+    document.addEventListener('DOMContentLoaded', function() {
+        //Create and init Popup
+        var popup = new Popup();
+        popup.init();
+    });
+}
