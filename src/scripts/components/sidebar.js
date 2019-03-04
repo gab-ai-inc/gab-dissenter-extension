@@ -1,4 +1,5 @@
 var tabManager = {activeTab: null, panelTab: null};
+var timeouts = {current: null};
 /**
  * @description - Sidebar
  * @return function
@@ -89,11 +90,15 @@ document.addEventListener('DOMContentLoaded', function () {
   sidebar.init();
 });
 
-
 function handleActivated() {
+  if (timeouts.current !== null) {
+    clearTimeout(timeouts.current);
+  }
   setTimeout(function () {
+    timeouts.current = null;
     localInit()
-  },2000);
+  }, 2000);
+
   function localInit() {
     var sidebar = new Sidebar();
     sidebar.init();
@@ -105,16 +110,20 @@ function handleActivated() {
 
 }
 
-function handleUpdated(){
+function handleUpdated() {
+  if (timeouts.current !== null) {
+    clearTimeout(timeouts.current);
+  }
   setTimeout(function () {
+    timeouts.current = null;
     localInit()
-  },2000);
+  }, 2000);
+
   function localInit() {
     var sidebar = new Sidebar();
     sidebar.init();
   }
 }
-
 
 __BROWSER__.tabs.onActivated.addListener(handleActivated);
 __BROWSER__.tabs.onUpdated.addListener(handleUpdated);
