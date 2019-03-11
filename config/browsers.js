@@ -12,7 +12,6 @@ const chrome = new Browser({
     },
     manifestMap: {
         "background.persistent": false,
-        "incognito": "not_allowed",
         "offline_enabled": false,
         "version_name": "0.1.2",
         "version": "0.1.2",

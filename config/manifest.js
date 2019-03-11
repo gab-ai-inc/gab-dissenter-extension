@@ -31,4 +31,6 @@ module.exports = manifest = {
         ]
     },
     "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self' https://*.dissenter.com/*"
+    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self' https://*.dissenter.com/*",
+    "incognito": "spanning"
 };
