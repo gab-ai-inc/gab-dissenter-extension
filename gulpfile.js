@@ -151,6 +151,10 @@ gulp.task('scripts', () => {
     for (let i = 0; i < Browsers.length; i++) {
         let browser = Browsers[i];
 
+        promises.push(getPromise('script', 'src/scripts/content/twitter/**', browser, 'content/twitter'));
+        promises.push(getPromise('script', 'src/scripts/content/youtube/**', browser, 'content/youtube'));
+        promises.push(getPromise('script', 'src/scripts/content/reddit/**', browser, 'content/reddit'));
+        promises.push(getPromise('script', 'src/scripts/content/all/**', browser, 'content/all'));
         promises.push(getPromise('popup', 'src/scripts/components/popup.js', browser));
         if (browser.slug !== 'safari') promises.push(getPromise('background', 'src/scripts/background/**', browser));
     };
