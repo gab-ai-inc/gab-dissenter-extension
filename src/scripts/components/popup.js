@@ -17,15 +17,13 @@ var Popup = function() {
      * @description - On Popup open
      * @function scope.init
      * @param  {Object} activeTab - Active tab object
-     * @param  {String} activeTab.title - Active tab title
      * @param  {String} activeTab.url - Active tab title
      */
     scope.onPopupOpen = function(activeTab) {
         //Must be object
         if (!isObject(activeTab)) return false;
 
-        //Get title, url
-        var title = activeTab['title'] || '';
+        //Get url
         var url = activeTab['url'] || '';
 
         //If same as currently active, don't reload
