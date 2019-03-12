@@ -39,3 +39,23 @@ var isDate = function(date) {
 var isArray = function(arr) {
     return Array.isArray(arr);
 };
+
+/**
+ * @description Internal helper to check if DOMContentLoaded
+ * @function ready
+ * @param {Function} fn
+ */
+function ready(fn) {
+    var d = document;
+    (d.readyState == 'loading') ? d.addEventListener('DOMContentLoaded', fn): fn();
+};
+
+/**
+ * @description Internal helper to get value from query string
+ * @function getQueryStringValue
+ * @param {String} key
+ * @returns {String|null}
+ */
+function getQueryStringValue(key) {
+    return decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
+}
