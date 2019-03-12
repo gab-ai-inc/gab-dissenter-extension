@@ -133,9 +133,7 @@ gulp.task('scripts', () => {
                 .pipe(replace('__BROWSER__', browser.scriptVariableMap.BROWSER))
                 .pipe(replace('__CONTEXT_MENUS__', browser.scriptVariableMap.CONTEXT_MENUS))
                 .pipe(uglify({
-                    mangle: {
-                        toplevel: true,
-                    },
+                    mangle: {},
                 }))
                 .pipe(insert.prepend(`/* Automatically generated file. Do not edit directly.\nCopyright (C) 2019 Gab AI, Inc.\nAll Rights Reserved */\n`))
                 .pipe(gulp.dest(`${savePath}/${fileName}`))
