@@ -28,6 +28,11 @@ const firefox = new Browser({
     },
     manifestMap: {
         "version": "0.1.1",
+        "sidebar_action": {
+            "default_title": "Dissenter",
+            "default_panel": "sidebar/sidebar.html",
+            "default_icon": "assets/images/logo/icon-128.png"
+        },
     },
 });
 

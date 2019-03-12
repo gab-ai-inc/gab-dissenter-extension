@@ -65,6 +65,7 @@ gulp.task('styles', function () {
         let browser = Browsers[i];
 
         promises.push(getPromise('popup', browser.path));
+        if (browser.slug === 'firefox') promises.push(getPromise('sidebar', browser.path));
     };
 
     return Promise.all(promises);
@@ -157,6 +158,7 @@ gulp.task('scripts', () => {
         promises.push(getPromise('script', 'src/scripts/content/all/**', browser, 'content/all'));
         promises.push(getPromise('popup', 'src/scripts/components/popup.js', browser));
         if (browser.slug !== 'safari') promises.push(getPromise('background', 'src/scripts/background/**', browser));
+        if (browser.slug === 'firefox') promises.push(getPromise('sidebar', 'src/scripts/components/sidebar.js', browser));
     };
 
     return Promise.all(promises);
@@ -249,6 +251,7 @@ gulp.task('html', () => {
 
         promises.push(getPromise('popup', browser));
         if (browser.slug !== 'safari') promises.push(getPromise('background', browser));
+        if (browser.slug === 'firefox') promises.push(getPromise('sidebar', browser));
     };
 
     return Promise.all(promises);

@@ -1,0 +1,23 @@
+/*================================================
+    Sidebar
+================================================*/
+.sidebar {
+    display: block;
+    min-width: 100%;
+    min-height: 100vh;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+
+    * {
+        display: block;
+        height: 100%;
+        width: 100%;
+        min-width: 100%;
+        min-height: 100vh;
+    }
+
+    &__inner {
+        background: url("../assets/images/icons/spinner.svg") no-repeat center / 60px 60px;
+    }
+}
