@@ -11,6 +11,7 @@ module.exports = manifest = {
     },
     "permissions": [
         "activeTab",
+        "tabs",
         "https://*.dissenter.com/*"
     ],
     "browser_action": {
