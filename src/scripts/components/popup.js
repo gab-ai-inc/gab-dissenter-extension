@@ -45,9 +45,19 @@ var Popup = function() {
 
     /**
      * @description - Init popup on open
+     * @param {string|null} url
      * @function scope.init
      */
-    scope.init = function() {
+    scope.init = function(url) {
+        //Check if url exists
+        if (url && isString(url)) {
+            //Open popup now
+            scope.onPopupOpen({'url': url});
+
+            //Don't continue
+            return;
+        }
+
         if (BROWSER_CONFIG.slug === BROWSER_SAFARI_SLUG) {
            var activeWindow = safari.application.activeBrowserWindow;
            var activeTab = activeWindow.activeTab;
@@ -90,8 +100,12 @@ else {
      * @description - On popup load
      */
     document.addEventListener('DOMContentLoaded', function() {
+        //Check if there's an incoming query string for the url
+        //E.g. from content scripts, using a popup window
+        var url = getQueryStringValue('url');
+
         //Create and init Popup
         var popup = new Popup();
-        popup.init();
+        popup.init(url);
     });
 }
