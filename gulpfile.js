@@ -25,7 +25,7 @@ function setObjectValueWithPath(object, path, value) {
 /**
  * @description - Create gulp task 'styles'
  */
-gulp.task('styles', function () {
+gulp.task('styles', function() {
     //Modules
     const sass = require('gulp-sass');
     const cleanCSS = require('gulp-clean-css');
@@ -152,11 +152,12 @@ gulp.task('scripts', () => {
     for (let i = 0; i < Browsers.length; i++) {
         let browser = Browsers[i];
 
-        promises.push(getPromise('script', 'src/scripts/content/twitter/**', browser, 'content/twitter'));
-        promises.push(getPromise('script', 'src/scripts/content/youtube/**', browser, 'content/youtube'));
-        promises.push(getPromise('script', 'src/scripts/content/reddit/**', browser, 'content/reddit'));
-        promises.push(getPromise('script', 'src/scripts/content/all/**', browser, 'content/all'));
         promises.push(getPromise('popup', 'src/scripts/components/popup.js', browser));
+
+        if (browser.slug !== 'safari') promises.push(getPromise('script', 'src/scripts/content/twitter/**', browser, 'content/twitter'));
+        if (browser.slug !== 'safari') promises.push(getPromise('script', 'src/scripts/content/youtube/**', browser, 'content/youtube'));
+        if (browser.slug !== 'safari') promises.push(getPromise('script', 'src/scripts/content/reddit/**', browser, 'content/reddit'));
+        if (browser.slug !== 'safari') promises.push(getPromise('script', 'src/scripts/content/all/**', browser, 'content/all'));
         if (browser.slug !== 'safari') promises.push(getPromise('background', 'src/scripts/background/**', browser));
         if (browser.slug === 'firefox') promises.push(getPromise('sidebar', 'src/scripts/components/sidebar.js', browser));
     };
@@ -175,22 +176,21 @@ gulp.task('manifest', () => {
 
         let path = `${browser.path}`;
 
-        if (browser.slug == 'safari') {
+        if (browser.slug === 'safari') {
             let promise = new Promise(function(resolve, reject) {
                 fs.readFile(`./config/Info.plist`, function(err, data) {
-                   if (err) reject(err);
-                   else {
-                       fs.writeFile(`${path}/Info.plist`, data, function(err) {
-                          if (err) reject(err);
-                          else resolve();
-                       });
-                   }
+                    if (err) reject(err);
+                    else {
+                        fs.writeFile(`${path}/Info.plist`, data, function(err) {
+                            if (err) reject(err);
+                            else resolve();
+                        });
+                    }
                 });
             });
 
             promises.push(promise);
-        }
-        else {
+        } else {
             //Get manifest and input browser keys
             let str = JSON.stringify(manifest);
             str = str.replace(/__CONTEXT_MENUS__/g, browser.scriptVariableMap.CONTEXT_MENUS);
@@ -204,8 +204,8 @@ gulp.task('manifest', () => {
 
             let promise = new Promise(function(resolve, reject) {
                 fs.writeFile(`${path}/manifest.json`, JSON.stringify(thisManifest), function(err) {
-                   if (err) reject(err);
-                   else resolve();
+                    if (err) reject(err);
+                    else resolve();
                 });
             });
 
