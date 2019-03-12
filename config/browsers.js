@@ -5,7 +5,7 @@ const Browser = require('./browser');
 const chrome = new Browser({
     name: 'Google Chrome',
     slug: 'chrome',
-    version: '0.1.2',
+    version: '0.1.3',
     scriptVariableMap: {
         BROWSER: 'chrome',
         MESSENGER: 'extension',
@@ -13,21 +13,21 @@ const chrome = new Browser({
     manifestMap: {
         "background.persistent": false,
         "offline_enabled": false,
-        "version_name": "0.1.2",
-        "version": "0.1.2",
+        "version_name": "0.1.3",
+        "version": "0.1.3",
     },
 });
 
 const firefox = new Browser({
     name: 'Mozilla Firefox',
     slug: 'firefox',
-    version: '0.1.1',
+    version: '0.1.2',
     scriptVariableMap: {
         BROWSER: 'browser',
         MESSENGER: 'runtime',
     },
     manifestMap: {
-        "version": "0.1.1",
+        "version": "0.1.2",
         "sidebar_action": {
             "default_title": "Dissenter",
             "default_panel": "sidebar/sidebar.html",
@@ -39,14 +39,14 @@ const firefox = new Browser({
 const edge = new Browser({
     name: 'Microsoft Edge',
     slug: 'edge',
-    version: '0.1.2',
+    version: '0.1.3',
     scriptVariableMap: {
         BROWSER: 'browser',
         MESSENGER: 'runtime',
     },
     manifestMap: {
         "background.persistent": false,
-        "version": "0.1.2",
+        "version": "0.1.3",
         "author": "Gab.com",
     },
 });
@@ -54,7 +54,7 @@ const edge = new Browser({
 const safari = new Browser({
     name: 'Apple Safari',
     slug: 'safari',
-    version: '0.1.1',
+    version: '0.1.2',
     scriptVariableMap: {
         BROWSER: 'browser',
         CONTEXT_MENUS: 'menu',
