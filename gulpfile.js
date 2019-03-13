@@ -66,6 +66,7 @@ gulp.task('styles', function() {
 
         promises.push(getPromise('popup', browser.path));
         if (browser.slug === 'firefox') promises.push(getPromise('sidebar', browser.path));
+        if (browser.slug !== 'safari') promises.push(getPromise('options', browser.path));
     };
 
     return Promise.all(promises);
@@ -152,11 +153,13 @@ gulp.task('scripts', () => {
 
         promises.push(getPromise('popup', 'src/scripts/components/popup.js', browser));
 
-        if (browser.slug !== 'safari') promises.push(getPromise('script', 'src/scripts/content/twitter/**', browser, 'content/twitter'));
-        if (browser.slug !== 'safari') promises.push(getPromise('script', 'src/scripts/content/youtube/**', browser, 'content/youtube'));
-        if (browser.slug !== 'safari') promises.push(getPromise('script', 'src/scripts/content/reddit/**', browser, 'content/reddit'));
-        if (browser.slug !== 'safari') promises.push(getPromise('script', 'src/scripts/content/all/**', browser, 'content/all'));
-        if (browser.slug !== 'safari') promises.push(getPromise('background', 'src/scripts/background/**', browser));
+        if (browser.slug !== 'safari') {
+            promises.push(getPromise('options', 'src/scripts/components/options.js', browser));
+            promises.push(getPromise('script', 'src/scripts/content/twitter/**', browser, 'content/twitter'));
+            promises.push(getPromise('script', 'src/scripts/content/youtube/**', browser, 'content/youtube'));
+            promises.push(getPromise('script', 'src/scripts/content/reddit/**', browser, 'content/reddit'));
+            promises.push(getPromise('background', 'src/scripts/background/**', browser));
+        }
         if (browser.slug === 'firefox') promises.push(getPromise('sidebar', 'src/scripts/components/sidebar.js', browser));
     };
 
@@ -248,7 +251,10 @@ gulp.task('html', () => {
         let browser = Browsers[i];
 
         promises.push(getPromise('popup', browser));
-        if (browser.slug !== 'safari') promises.push(getPromise('background', browser));
+        if (browser.slug !== 'safari') {
+            promises.push(getPromise('background', browser));
+            promises.push(getPromise('options', browser));
+        }
         if (browser.slug === 'firefox') promises.push(getPromise('sidebar', browser));
     };
 
