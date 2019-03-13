@@ -25,20 +25,22 @@ __BROWSER__.runtime.onMessage.addListener(function(message, sender, sendResponse
         //Get popup url
         var popupURL = __BROWSER__.extension.getURL("popup/popup.html?url=" + url);
 
-        if (BROWSER_CONFIG.slug === BROWSER_FIREFOX_SLUG) {
+        var showWindow = gdes.getValue(WINDOW_SIDEBAR_UNAVAILABLE_ENABLED);
+
+        if (BROWSER_CONFIG.slug === BROWSER_FIREFOX_SLUG && !showWindow) {
             __BROWSER__.runtime.sendMessage({url: url});
+            return true;
         }
-        else {
-            //Open new popup window with url using popup.html
-            __BROWSER__.windows.create({
-                url: popupURL,
-                width: 420,
-                height: windowHeight,
-                top: top,
-                left: screenWidth,
-                type: 'popup'
-            });
-        }
+        
+        //Open new popup window with url using popup.html
+        __BROWSER__.windows.create({
+            url: popupURL,
+            width: 420,
+            height: windowHeight,
+            top: top,
+            left: screenWidth,
+            type: 'popup'
+        });
     }
     else if (action === BACKGROUND_ACTION_GET_KEY) {
         var key = message.key || '';

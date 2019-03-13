@@ -12,6 +12,7 @@ var Options = function() {
     var twitterCheckbox = document.getElementById('twitter-enabled');
     var redditCheckbox = document.getElementById('reddit-enabled');
     var youtubeCheckbox = document.getElementById('youtube-enabled');
+    var windowSidebarCheckbox = document.getElementById('window-sidebar-enabled');
 
     //Listeners
 
@@ -57,6 +58,20 @@ var Options = function() {
         });
     };
 
+    /**
+     * @description - Sidebar window checkbox
+     */
+    windowSidebarCheckbox.onchange = function() {
+        var value = this.checked;
+
+        //Send message
+        __BROWSER__.runtime.sendMessage({
+            action: BACKGROUND_ACTION_SET_KEY,
+            key: WINDOW_SIDEBAR_UNAVAILABLE_ENABLED,
+            value: value
+        });
+    };
+
     //Global functions
 
     /**
@@ -75,6 +90,7 @@ var Options = function() {
             twitterCheckbox.checked = data[TWITTER_BUTTONS_ENABLED];
             redditCheckbox.checked = data[REDDIT_BUTTONS_ENABLED];
             youtubeCheckbox.checked = data[YOUTUBE_BUTTONS_ENABLED];
+            windowSidebarCheckbox.checked = data[WINDOW_SIDEBAR_UNAVAILABLE_ENABLED];
         });
     };
 };
