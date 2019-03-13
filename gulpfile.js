@@ -255,8 +255,38 @@ gulp.task('html', () => {
     return Promise.all(promises);
 });
 
+/**
+ * @description - Create gulp task 'fonts'
+ */
+gulp.task('fonts', () => {
+    let promises = [];
+
+    for (let i = 0; i < Browsers.length; i++) {
+        let browser = Browsers[i];
+
+        //Skip safari
+        if (browser.slug === 'safari') continue;
+
+        let path = `${browser.path}/assets/fonts`;
+
+        let promise = new Promise((resolve, reject) => {
+            gulp
+                .src(['src/fonts/**/**'])
+                .pipe(gulp.dest(path))
+                .on('error', err => {
+                    reject(err);
+                }).on('end', () => {
+                    resolve();
+                });
+        });
+
+        promises.push(promise);
+    };
+
+    return Promise.all(promises);
+});
 
 /**
- * @description - Create gulp task 'build' to combine ('images', 'styles', 'scripts', 'manifest', 'html')
+ * @description - Create gulp task 'build' to combine ('images', 'styles', 'scripts', 'manifest', 'html', 'fonts')
  */
-gulp.task('build', gulp.series('images', 'styles', 'scripts', 'manifest', 'html'));
+gulp.task('build', gulp.series('images', 'styles', 'scripts', 'manifest', 'html', 'fonts'));

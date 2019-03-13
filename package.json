@@ -8,6 +8,7 @@
         "gulp:styles": "gulp styles",
         "gulp:html": "gulp html",
         "gulp:manifest": "gulp manifest",
+        "gulp:fonts": "gulp fonts",
         "build": "gulp build"
     },
     "devDependencies": {
