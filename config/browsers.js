@@ -15,6 +15,7 @@ const chrome = new Browser({
         "offline_enabled": false,
         "version_name": "0.1.3",
         "version": "0.1.3",
+        "options_page": "options/options.html",
     },
 });
 
@@ -33,6 +34,10 @@ const firefox = new Browser({
             "default_panel": "sidebar/sidebar.html",
             "default_icon": "assets/images/logo/icon-128.png"
         },
+        "options_ui": {
+            "page": "options/options.html",
+            "browser_style": true,
+        },
     },
 });
 
@@ -48,6 +53,10 @@ const edge = new Browser({
         "background.persistent": false,
         "version": "0.1.3",
         "author": "Gab.com",
+        "options_ui": {
+            "page": "options/options.html",
+            "browser_style": true,
+        },
     },
 });
 
