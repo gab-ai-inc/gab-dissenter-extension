@@ -40,6 +40,30 @@ __BROWSER__.runtime.onMessage.addListener(function(message, sender, sendResponse
             });
         }
     }
+    else if (action === BACKGROUND_ACTION_GET_KEY) {
+        var key = message.key || '';
+
+        //Key must exist
+        if (!key) {
+            if (sendResponse) sendResponse(null);
+            return true;
+        }
+
+        //Get/Send value
+        var value = gdes.getValue(key);
+
+        if (sendResponse) sendResponse(value);
+    }
+    else if (action === BACKGROUND_ACTION_SET_KEY) {
+        //Get key/value
+        var key = message.key || '';
+        var value = message.value || '';
+
+        //Must be key
+        if (!key) return true;
+
+        //Set value in storage
+        gdes.setValue(key, value);
     }
 
     //Async
