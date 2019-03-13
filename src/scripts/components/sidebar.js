@@ -55,9 +55,21 @@ var Sidebar = function() {
 
     /**
      * @description - Init Sidebar on open
+     * @param {string|null} url
      * @function scope.init
      */
-    scope.init = function() {
+    scope.init = function(url) {
+        //Check if url exists
+        if (url && isString(url)) {
+            //Open popup now
+            scope.onSidebarOpen({
+                'url': url
+            });
+
+            //Don't continue
+            return;
+        }
+
         //Only Firefox
         if (BROWSER_CONFIG.slug !== BROWSER_FIREFOX_SLUG) return;
 
@@ -116,3 +128,20 @@ function handleReload() {
 //Listen for changes on browser tabs
 __BROWSER__.tabs.onActivated.addListener(handleReload);
 __BROWSER__.tabs.onUpdated.addListener(handleReload);
+
+/**
+ * @description - Listen for message from runtime
+ */
+__BROWSER__.runtime.onMessage.addListener(function(request) {
+    if (!isObject(request)) return false;
+    var url = request['url'] || '';
+
+    if (!isString(url)) return false;
+    if (url.length <= 1) return false;
+
+    //Set loading screen
+    sidebar.toggleLoading(true);
+
+    //Load url
+    sidebar.init(url);
+});
