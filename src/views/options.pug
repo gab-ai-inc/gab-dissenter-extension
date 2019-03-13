@@ -1,0 +1,83 @@
+doctype html
+
+html
+	head
+		title Dissenter Extension - Options
+		meta(charset="utf-8")
+		link(href='./options.css' type='text/css' rel='stylesheet')
+
+	
+	body
+		div(class='main')
+			
+
+			header(class='header fixed')
+				div(class='header__inner')
+					img(class='header__img-logo' src='../assets/images/logo/gab-logo.png')
+					h1(class='header__title') Dissenter Extension &mdash; Options
+					span(class='header__subtitle') Close this page when you're done
+			
+
+			div(class='content rel')
+				div(class='content__inner')
+					
+
+					//- BLOCK - Context Menu
+					div(class='input-block')
+						div(class='input-block__meta no-select')
+							span(class='input-block__meta-title') Content Scripts
+							span(class='input-block__meta-subtitle')
+								| "Content scripts" are scripts that run in specific web pages.
+								| By using the standard Document Object Model (DOM), these scripts are able to make changes to those websites in order to enhance the experience.
+						div(class='input-block__items')
+
+							label(class='input-block-item no-select')
+								input(id='twitter-enabled' class='input-block-item__checkbox' type='checkbox' checked='')
+								| Twitter Enabled
+							label(class='input-block-item no-select')
+								input(id='reddit-enabled' class='input-block-item__checkbox' type='checkbox' checked='')
+								| Reddit Enabled
+							label(class='input-block-item no-select')
+								input(id='youtube-enabled' class='input-block-item__checkbox' type='checkbox' checked='')
+								| YouTube Enabled
+		
+					//- BLOCK - Permissions
+					div(class='input-block')
+						div(class='input-block__meta no-select')
+							span(class='input-block__meta-title') About Browser Permissions
+						div(class='input-block__items input-block__items--full')
+							p(class='input-block-item__paragraph')
+								b Active Tab:&nbsp;
+								| The "Active Tab" permission gives this extension temporary access to the currently active tab when the you invoke the extension.&nbsp;
+								| Access to the tab lasts while the you are on that page, and is revoked when the you navigates away or closes the tab.
+
+					//- BLOCK - Contact
+					div(class='input-block')
+						div(class='input-block__meta no-select')
+							span(class='input-block__meta-title') Contact
+						div(class='input-block__items input-block__items--full')
+
+							p(class='input-block-item__paragraph')
+								| If you have any questions, ideas, bugs or anything else, please post a new gab using the hashtag: 
+								b #DissenterExtension
+								| .
+							p(class='input-block-item__paragraph')
+								| Your question, idea or bug may have already been posted by someone else, please have a look at the most recent posts using hashtag 
+								b #DissenterExtension
+								|  here: 
+								a(class='input-block-item__paragraph-link' rel='noreferrer nofollow' href='https://gab.com/hash/DissenterExtension' target='_blank') gab.com/hash/DissenterExtension
+								| .
+							p(class='input-block-item__paragraph') Please be mindful that when submitting a post, more is better. Include any and all information related to your query, use photos or videos if necessary and someone will be sure to respond in a timely manner.
+							p(class='input-block-item__paragraph input-block-item__paragraph--about-extension') 
+								b Browser:&nbsp;
+								span(id='extension-about__browser') __BROWSER_NAME__
+								b Version:&nbsp;
+								span(id='extension-about__version') __VERSION__
+								b Download:&nbsp;
+								a(class='input-block-item__paragraph-link' rel='noreferrer nofollow' href='https://www.dissenter.com/download' target='_blank') dissenter.com/download
+							p(class='input-block-item__paragraph center input-block-item__paragraph--about-extension') 
+								| Copyright &copy; 2019 Gab AI, Inc.
+								br
+								| Made in USA
+
+		script(src='./options.js')

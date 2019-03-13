@@ -1,0 +1,220 @@
+@font-face {
+    font-family: 'HelveticaNeue';
+    font-style: normal;
+    font-weight: 400;
+    src: url("../assets/fonts/HelveticaNeue.woff") format('woff');
+}
+@font-face {
+    font-family: 'HelveticaNeue';
+    font-style: bold;
+    font-weight: 600;
+    src: url("../assets/fonts/HelveticaNeue-Bold.woff") format('woff');
+}
+
+a,
+button,
+div,
+form,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+label,
+p,
+span {
+    font-family: 'HelveticaNeue', sans-serif;
+}
+
+.main,
+body,
+html {
+    display: block;
+}
+
+.header {
+    display: block;
+    top: 0;
+    border-bottom: 1px solid;
+    z-index: 2;
+    width: 100%;
+    height: 80px;
+
+    &__inner {
+        display: flex;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 60px;
+        height: 100%;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    &__title {
+        display: inline-block;
+        margin-left: 20px;
+        padding-left: 20px;
+        border-left: 1px solid;
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    &__subtitle {
+        display: block;
+        margin-left: auto;
+        font-size: 12px;
+        font-weight: 600;
+        color: #bbb;
+    }
+    @media (min-width:0) and (max-width:960px) {
+        &__inner {
+            flex-wrap: wrap;
+            padding: 15px 20px;
+        }
+
+        &__title {
+            display: block;
+            margin-left: 0;
+            padding-left: 0;
+            font-size: 16px;
+            border-left: none;
+            width: 100%;
+            text-align: center;
+        }
+
+        &__subtitle {
+            display: block;
+            margin: 0 auto;
+            width: 100%;
+            text-align: center;
+        }
+    }
+
+    &__img-logo {
+        display: inline-block;
+        width: auto;
+        height: 30px;
+        @media (min-width:0) and (max-width:960px) {
+            display: none;
+        }
+    }
+}
+
+.content {
+    display: block;
+    margin-top: 20px;
+    width: 100vw;
+    height: auto;
+
+    &__inner {
+        display: flex;
+        max-width: 800px;
+        margin: 0 auto 40px;
+        padding: 40px;
+        height: auto;
+        flex-direction: column;
+        @media (min-width:0) and (max-width:960px) {
+            padding: 10px;
+        }
+    }
+}
+
+.input-block {
+    display: block;
+    padding: 10px 20px 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid;
+
+    &:last-of-type {
+        border-bottom: none;
+    }
+
+    &__meta {
+        display: inline-block;
+        vertical-align: top;
+        width: 360px;
+        padding-right: 40px;
+    }
+
+    &__meta-title {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    &__meta-subtitle {
+        display: block;
+        font-size: 12px;
+    }
+
+    &__items {
+        display: inline-block;
+        float: right;
+        min-width: 200px;
+
+        &--full {
+            display: block;
+            width: 100%;
+            float: none;
+            margin-top: 15px;
+        }
+    }
+    @media (min-width:0) and (max-width:960px) {
+        &__meta {
+            display: block;
+            width: 100%;
+            padding-right: 0;
+            margin-bottom: 35px;
+        }
+
+        &__items {
+            display: block;
+            float: none;
+            min-width: none;
+
+            &--full {
+                margin-top: 0;
+            }
+        }
+    }
+}
+
+.input-block-item {
+    display: block;
+    margin-bottom: 10px;
+    cursor: pointer;
+
+    &__title {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    &__checkbox {
+        display: inline-block;
+        margin-right: 5px;
+    }
+
+    &__paragraph {
+        display: block;
+        font-size: 12px;
+        margin-bottom: 10px;
+        word-break: break-word;
+
+        &--about-extension {
+            border-top: 1px solid;
+            padding-top: 10px;
+
+            a,
+            span {
+                margin-right: 10px;
+            }
+        }
+    }
+
+    &__paragraph-link {
+        text-decoration: underline;
+        font-weight: 600;
+    }
+}
