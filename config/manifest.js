@@ -43,13 +43,6 @@ module.exports = manifest = {
         {
             "matches": ["https://*.reddit.com/*"],
             "js": ["content/reddit/script/script.js"]
-        },
-        {
-            "matches": [
-                "http://*/*",
-                "https://*/*"
-            ],
-            "js": ["content/all/script/script.js"]
         }
     ],
     "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self' https://*.dissenter.com/*",
