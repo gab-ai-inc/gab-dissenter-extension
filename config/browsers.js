@@ -38,6 +38,11 @@ const firefox = new Browser({
             "page": "options/options.html",
             "browser_style": true,
         },
+        "permissions": [
+            "activeTab",
+            "tabs",
+            "https://*.dissenter.com/*",
+        ],
     },
 });
 
