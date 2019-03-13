@@ -105,10 +105,18 @@ var GDYoutube = function() {
 
 //Wait for page to be ready and loaded
 ready(function() {
-    //Delay a bit
-    setTimeout(function () {
-        //Init new script
-        var gdy = new GDYoutube();
-        gdy.init();
-    }, 250);
+    //Get config keys from background
+    __BROWSER__.runtime.sendMessage({
+        action: BACKGROUND_ACTION_GET_KEY,
+        key: YOUTUBE_BUTTONS_ENABLED
+    }, function(enabled) {
+        if (!enabled) return false;
+
+        //Delay a bit
+        setTimeout(function () {
+            //Init new script
+            var gdy = new GDYoutube();
+            gdy.init();
+        }, 250);
+    });
 });
