@@ -25,15 +25,21 @@ __BROWSER__.runtime.onMessage.addListener(function(message, sender, sendResponse
         //Get popup url
         var popupURL = __BROWSER__.extension.getURL("popup/popup.html?url=" + url);
 
-        //Open new popup window with url using popup.html
-        __BROWSER__.windows.create({
-            url: popupURL,
-            width: 420,
-            height: windowHeight,
-            top: top,
-            left: screenWidth,
-            type: 'popup'
-        });
+        if (BROWSER_CONFIG.slug === BROWSER_FIREFOX_SLUG) {
+            __BROWSER__.runtime.sendMessage({url: url});
+        }
+        else {
+            //Open new popup window with url using popup.html
+            __BROWSER__.windows.create({
+                url: popupURL,
+                width: 420,
+                height: windowHeight,
+                top: top,
+                left: screenWidth,
+                type: 'popup'
+            });
+        }
+    }
     }
 
     //Async
