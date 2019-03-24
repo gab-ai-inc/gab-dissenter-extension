@@ -6,6 +6,24 @@ __BROWSER__.browserAction.onClicked.addListener(function() {
 });
 
 /**
+ * @description - On tabs updated, send message to content script
+ */
+__BROWSER__.tabs.onUpdated.addListener(function(tabId) {
+    __BROWSER__.tabs.sendMessage(tabId, {
+        action: BACKGROUND_ACTION_TAB_UPDATED
+    });
+});
+
+/**
+ * @description - On tabs activated, send message to content script
+ */
+__BROWSER__.tabs.onActivated.addListener(function(activeInfo) {
+    __BROWSER__.tabs.sendMessage(activeInfo.tabId, {
+        action: BACKGROUND_ACTION_TAB_UPDATED
+    });
+});
+
+/**
  * @description - onMessage Handler for sending messages from elsewhere to this background.js file
  * @returns callback(*)
  */
@@ -66,6 +84,38 @@ __BROWSER__.runtime.onMessage.addListener(function(message, sender, sendResponse
 
         //Set value in storage
         gdes.setValue(key, value);
+    }
+    else if (action === BACKGROUND_ACTION_SET_BADGE) {
+        var url = message.url || '';
+
+        //Url must exist
+        if (!url) return true;
+
+        //
+        var fetchUrl = COMMENT_COUNT_URI + url;
+
+        //Perform request to get comment count
+        performRequest({
+            method: 'GET',
+            url: fetchUrl
+        }, function(error, data) {
+            //Must be object
+            if (!isObject(data)) {
+                setExtensionIconBadge('');
+                return true;
+            }
+            //Must be successful
+            if (!data.success) {
+                setExtensionIconBadge('');
+                return true;
+            }
+
+            //Convert to string
+            var commentCount = String(data.url.stats.commentCount);
+
+            //Set badge
+            setExtensionIconBadge(commentCount);
+        });
     }
 
     //Async
