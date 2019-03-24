@@ -1,7 +1,7 @@
 /**
- * @description - Gab Dissenter - Twitter content script
+ * @description - Gab Dissenter - Twitter V2 content script
  */
-var GDTwitter = function() {
+var GDTwitterV2 = function() {
     //Global scope
     var scope = this;
 
@@ -9,40 +9,40 @@ var GDTwitter = function() {
     var selectedTweet = null;
 
     /**
-     * @description - Finds tweets, appends dissent button to each
-     * @function fetchElements
+     * @description - Finds tweets (for twitter's updated design - 2019), appends dissent button to each
+     * @function fetchElementsV2
      * @return {Boolean} success
      */
-    function fetchElements() {
-        //All tweet list items on page
-        var tweets = document.querySelectorAll('div.tweet.js-actionable-tweet');
+    function fetchElementsV2() {
+      //All tweet list items on page
+      var tweets = document.querySelectorAll('div[aria-label="Share Tweet"]');
 
-        //Make sure exists
-        if (!tweets || tweets.length == 0) return false;
+      //Every 2 seconds check if there's more tweets and if so add new "Dissent This" btns
+      setTimeout(fetchElementsV2, 2000);
 
-        //Cycle through tweets to find the action bar
-        for (var i = 0; i < tweets.length; i++) {
-            var tweetBlock = tweets[i];
+      //Make sure exists
+      if (!tweets || tweets.length == 0) return false;
 
-            //Get permalink from tweet block
-            var permalink = getTweetPermalinkFromBlock(tweetBlock);
-            if (!permalink) continue;
-            if (tweetPermalinks.indexOf(permalink) > -1) continue;
+      //Cycle through tweets to find the action bar
+      for (var i = 0; i < tweets.length; i++) {
+          var tweetBlock = tweets[i];
 
-            //Push new permalink to list
-            tweetPermalinks.push(permalink);
+          //Get permalink from tweet block
+          var permalink = getTweetPermalinkFromBlockV2(tweetBlock);
+          if (!permalink) continue;
+          if (tweetPermalinks.indexOf(permalink) > -1) continue;
 
-            //Get "action block" to append new button to
-            var actionsBlock = tweetBlock.querySelector('div.ProfileTweet-actionList.js-actions');
+          //Push new permalink to list
+          tweetPermalinks.push(permalink);
 
-            //Create new btn, append and add action
-            var dissentBtn = createDissentBtn();
-            actionsBlock.appendChild(dissentBtn);
-            dissentBtn.onclick = dissentThisTweet.bind(null, permalink);
-        };
+          //Get "action block" to append new button to
+          var actionsBlock = tweetBlock.parentElement.parentElement;
 
-        //Every 2 seconds check if there's more tweets and if so add new "Dissent This" btns
-        setTimeout(fetchElements, 2000);
+          //Create new btn, append and add action
+          var dissentBtn = createDissentBtn();
+          actionsBlock.appendChild(dissentBtn);
+          dissentBtn.onclick = dissentThisTweet.bind(null, permalink);
+      };
     };
 
     /**
@@ -55,7 +55,8 @@ var GDTwitter = function() {
         var button = document.createElement("a");
         button.style.setProperty("display", 'inline-block', "important");
         button.style.setProperty("height", '18px', "important");
-        button.style.setProperty("width", '80px', "important");
+        button.style.setProperty("width", '65px', "important");
+        button.style.setProperty("vertical-align", 'top', "important");
 
         //Create "g" dissent icon
         var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
@@ -67,7 +68,7 @@ var GDTwitter = function() {
         svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
 
         var g = document.createElementNS("http://www.w3.org/2000/svg", "g");
-        g.setAttribute("fill", "#637481");
+        g.setAttribute("fill", "#657786");
         g.setAttribute("stroke", "none");
 
         var p = document.createElementNS("http://www.w3.org/2000/svg", "path");
@@ -103,12 +104,17 @@ var GDTwitter = function() {
      * @param {Node} tweetBlock
      * @return {String}
      */
-    function getTweetPermalinkFromBlock(tweetBlock) {
+    function getTweetPermalinkFromBlockV2(tweetBlock) {
         //Make sure exists
         if (!tweetBlock) return null;
 
+        var parent = tweetBlock.parentElement.parentElement.parentElement;
+        var btn = parent.querySelectorAll('a[href*="/status/"]')[0];
+
+        if (!btn) return null;
+
         //Get attribute
-        var permalink = tweetBlock.getAttribute('data-permalink-path');
+        var permalink = btn.getAttribute('href');
         //Must exist
         if (!permalink || !isString(permalink)) return null;
 
@@ -127,7 +133,7 @@ var GDTwitter = function() {
      * @function scope.init
      */
     scope.init = function() {
-        fetchElements();
+        fetchElementsV2();
     };
 };
 
@@ -143,7 +149,7 @@ ready(function() {
         //Delay a bit
         setTimeout(function () {
             //Init new script
-            var gdt = new GDTwitter();
+            var gdt = new GDTwitterV2();
             gdt.init();
         }, 150);
     });
