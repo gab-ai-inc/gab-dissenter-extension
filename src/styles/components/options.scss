@@ -152,7 +152,7 @@ html {
     &__items {
         display: inline-block;
         float: right;
-        min-width: 200px;
+        max-width: 260px;
 
         &--full {
             display: block;
@@ -172,7 +172,7 @@ html {
         &__items {
             display: block;
             float: none;
-            min-width: none;
+            max-width: none;
 
             &--full {
                 margin-top: 0;
