@@ -33,7 +33,8 @@ module.exports = manifest = {
     "content_scripts": [
         {
             "matches": ["https://*.twitter.com/*"],
-            "js": ["content/twitter/script/script.js"]
+            "js": ["content/twitter/script/script.js"],
+            "run_at": "document_end",
         },
         {
             "matches": ["https://*.youtube.com/*"],
