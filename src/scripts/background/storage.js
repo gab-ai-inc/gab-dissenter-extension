@@ -21,6 +21,16 @@ function GDEStorage() {
             window.localStorage[STORAGE_BASE] = JSON.stringify(STORAGE_DEFAULT_PARAMS);
         }
 
+        var params = window.localStorage[STORAGE_BASE];
+        params = JSON.parse(params);
+
+        //Check if all keys exist on the localStorage object, if not set default params for those keys
+        for (var key in STORAGE_DEFAULT_PARAMS) {
+            if (params[key] === undefined) {
+                scope.setValue(key, STORAGE_DEFAULT_PARAMS[key]);
+            }
+        }
+
         return true;
     };
 
@@ -48,8 +58,8 @@ function GDEStorage() {
      * @return {*} value
      */
     scope.getValue = function(key) {
-        //Setup if none
-        setup();
+        //Must exist
+        if (window.localStorage == null && isObject(window.localStorage)) return false;
 
         //Get data, parse
         var params = window.localStorage[STORAGE_BASE];
@@ -70,8 +80,8 @@ function GDEStorage() {
      * @return {Boolean} success
      */
     scope.setValue = function(key, value) {
-        //Setup if none
-        setup();
+        //Must exist
+        if (window.localStorage == null && isObject(window.localStorage)) return false;
 
         //Get data, parse
         var params = window.localStorage[STORAGE_BASE];
@@ -82,20 +92,6 @@ function GDEStorage() {
 
         //Reset
         window.localStorage[STORAGE_BASE] = JSON.stringify(params);
-
-        //Success
-        return true;
-    };
-
-    /**
-     * @description - Helper function to log out, clear keys
-     * @returns {Boolean} success
-     */
-    scope.logout = function() {
-        if (window.localStorage == null) return false;
-
-        //Reset
-        scope.setValue(STORAGE_KEY_LOGGED_IN, false);
 
         //Success
         return true;
