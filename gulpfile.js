@@ -158,6 +158,7 @@ gulp.task('scripts', () => {
             promises.push(getPromise('script', 'src/scripts/content/twitter/**', browser, 'content/twitter'));
             promises.push(getPromise('script', 'src/scripts/content/youtube/**', browser, 'content/youtube'));
             promises.push(getPromise('script', 'src/scripts/content/reddit/**', browser, 'content/reddit'));
+            promises.push(getPromise('script', 'src/scripts/content/all/**', browser, 'content/all'));
             promises.push(getPromise('background', 'src/scripts/background/**', browser));
         }
         if (browser.slug === 'firefox') promises.push(getPromise('sidebar', 'src/scripts/components/sidebar.js', browser));
