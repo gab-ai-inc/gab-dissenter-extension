@@ -59,7 +59,7 @@ __BROWSER__.runtime.onMessage.addListener(function(message, sender, sendResponse
     else if (action === BACKGROUND_ACTION_SET_KEY) {
         //Get key/value
         var key = message.key || '';
-        var value = message.value || '';
+        var value = message.value;
 
         //Must be key
         if (!key) return true;
