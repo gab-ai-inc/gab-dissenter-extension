@@ -13,6 +13,8 @@ var Options = function() {
     var redditCheckbox = document.getElementById('reddit-enabled');
     var youtubeCheckbox = document.getElementById('youtube-enabled');
     var windowSidebarCheckbox = document.getElementById('window-sidebar-enabled');
+    var commentBadgeCheckbox = document.getElementById('comment-badge-enabled');
+    var disqusDissentCheckbox = document.getElementById('disqus-dissent-enabled');
 
     //Listeners
 
@@ -72,6 +74,34 @@ var Options = function() {
         });
     };
 
+    /**
+     * @description - Comment badge checkbox
+     */
+    commentBadgeCheckbox.onchange = function() {
+        var value = this.checked;
+
+        //Send message
+        __BROWSER__.runtime.sendMessage({
+            action: BACKGROUND_ACTION_SET_KEY,
+            key: WEBSITE_COMMENT_BADGE_ENABLED,
+            value: value
+        });
+    };
+
+    /**
+     * @description - Dissent button above any disqus thread
+     */
+    disqusDissentCheckbox.onchange = function() {
+        var value = this.checked;
+
+        //Send message
+        __BROWSER__.runtime.sendMessage({
+            action: BACKGROUND_ACTION_SET_KEY,
+            key: DISSENT_DISQUS_BUTTONS_ENABLED,
+            value: value
+        });
+    };
+
     //Global functions
 
     /**
@@ -91,6 +121,8 @@ var Options = function() {
             redditCheckbox.checked = data[REDDIT_BUTTONS_ENABLED];
             youtubeCheckbox.checked = data[YOUTUBE_BUTTONS_ENABLED];
             windowSidebarCheckbox.checked = data[WINDOW_SIDEBAR_UNAVAILABLE_ENABLED];
+            commentBadgeCheckbox.checked = data[WEBSITE_COMMENT_BADGE_ENABLED];
+            disqusDissentCheckbox.checked = data[DISSENT_DISQUS_BUTTONS_ENABLED];
         });
     };
 };
