@@ -9,6 +9,9 @@ __BROWSER__.browserAction.onClicked.addListener(function() {
  * @description - On tabs updated, send message to content script
  */
 __BROWSER__.tabs.onUpdated.addListener(function(tabId) {
+    //Reset first so we don't have hanging counts from prior tabs
+    setExtensionIconBadge('');
+    //Send message
     __BROWSER__.tabs.sendMessage(tabId, {
         action: BACKGROUND_ACTION_TAB_UPDATED
     });
@@ -18,6 +21,9 @@ __BROWSER__.tabs.onUpdated.addListener(function(tabId) {
  * @description - On tabs activated, send message to content script
  */
 __BROWSER__.tabs.onActivated.addListener(function(activeInfo) {
+    //Reset first so we don't have hanging counts from prior tabs
+    setExtensionIconBadge('');
+    //Send message
     __BROWSER__.tabs.sendMessage(activeInfo.tabId, {
         action: BACKGROUND_ACTION_TAB_UPDATED
     });
@@ -84,15 +90,23 @@ __BROWSER__.runtime.onMessage.addListener(function(message, sender, sendResponse
 
         //Set value in storage
         gdes.setValue(key, value);
+
+        //If we're toggling badge off, remove current badge
+        if (key === WEBSITE_COMMENT_BADGE_ENABLED && !value) {
+            setExtensionIconBadge('');
+        }
     }
     else if (action === BACKGROUND_ACTION_SET_BADGE) {
         var url = message.url || '';
 
         //Url must exist
-        if (!url) return true;
+        if (!url || !isString(url)) {
+            setExtensionIconBadge('');
+            return true;
+        }
 
         //
-        var fetchUrl = COMMENT_COUNT_URI + url;
+        var fetchUrl = COMMENT_COUNT_URI + encodeURIComponent(url);
 
         //Perform request to get comment count
         performRequest({
