@@ -15,6 +15,12 @@ function setExtensionIconBadge(text) {
         text: text,
         tabId: -1
     });
+
+    if (BROWSER_CONFIG.slug === BROWSER_FIREFOX_SLUG) {
+        __BROWSER__.browserAction.setBadgeTextColor({
+            color: "#ffffff"
+        });
+    }
 };
 
 /**
