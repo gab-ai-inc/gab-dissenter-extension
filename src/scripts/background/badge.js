@@ -12,8 +12,7 @@ function setExtensionIconBadge(text) {
     });
 
     __BROWSER__.browserAction.setBadgeText({
-        text: text,
-        tabId: -1
+        text: text
     });
 
     if (BROWSER_CONFIG.slug === BROWSER_FIREFOX_SLUG) {
