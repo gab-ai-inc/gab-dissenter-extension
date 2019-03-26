@@ -22,13 +22,13 @@ const chrome = new Browser({
 const firefox = new Browser({
     name: 'Mozilla Firefox',
     slug: 'firefox',
-    version: '0.1.4',
+    version: '0.1.5',
     scriptVariableMap: {
         BROWSER: 'browser',
         MESSENGER: 'runtime',
     },
     manifestMap: {
-        "version": "0.1.4",
+        "version": "0.1.5",
         "sidebar_action": {
             "default_title": "Dissenter",
             "default_panel": "sidebar/sidebar.html",
