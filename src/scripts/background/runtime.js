@@ -30,6 +30,27 @@ __BROWSER__.tabs.onActivated.addListener(function(activeInfo) {
 });
 
 /**
+ * @description - Within the URL box, type "dissent" to search Dissenter.com
+ */
+__BROWSER__.omnibox.onInputEntered.addListener(function(text, disposition) {
+    // Encode user input for special characters , / ? : @ & = + $ #
+    var newURL = 'https://dissenter.com/search?q=' + encodeURIComponent(text);
+
+    if (disposition == "currentTab") {
+        __BROWSER__.tabs.query({
+            active: true,
+            currentWindow: true
+        }, function(tabs) {
+            var tab = tabs[0];
+            __BROWSER__.tabs.update(tab.id, { url: newURL });
+        });
+    }
+    else {
+        __BROWSER__.tabs.create({ url: newURL });
+    }
+});
+
+/**
  * @description - onMessage Handler for sending messages from elsewhere to this background.js file
  * @returns callback(*)
  */

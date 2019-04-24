@@ -17,6 +17,9 @@ module.exports = manifest = {
         "default_icon": "assets/images/logo/icon-128.png",
         "default_popup": "popup/popup.html"
     },
+    "omnibox": {
+        "keyword" : "dissent"
+    },
     "commands": {
         "_execute_browser_action": {
             "suggested_key": {
