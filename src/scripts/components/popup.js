@@ -21,13 +21,15 @@ var Popup = function() {
      */
     scope.onPopupOpen = function(activeTab) {
         //Must be object
-        if (!isObject(activeTab)) return false;
+        if (!isObject(activeTab)) {
+            //Set default
+            setIframeUrl(DISSENTER_HOME_PAGE_URI);
+            return;
+        }
 
         //Get url
         var url = activeTab['url'] || '';
 
-        //If same as currently active, don't reload
-        if (currentActiveUrl === url) return false;
         //Set currently active if different
         currentActiveUrl = url;
 
@@ -35,10 +37,19 @@ var Popup = function() {
         var encoded = encodeURIComponent(url);
         var commentUrl = BASE_URI + encoded;
 
+        //Url must contain ://, set home page iframe if not
+        if (url.indexOf('://') == -1) {
+            commentUrl = DISSENTER_HOME_PAGE_URI;
+        }
+
+        setIframeUrl(commentUrl);
+    };
+
+    function setIframeUrl(url) {
         //Show iframe after delay
         setTimeout(function() {
             //Set src, make visible
-            iframe.setAttribute('src', commentUrl);
+            iframe.setAttribute('src', url);
             iframe.classList.remove('hidden');
         }, 250);
     };

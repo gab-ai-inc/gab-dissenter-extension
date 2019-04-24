@@ -5,6 +5,7 @@ var BROWSER_EDGE_SLUG = 'edge';
 var BROWSER_SAFARI_SLUG = 'safari';
 
 /* BASE URI FOR DISSENTER EXTENSION */
+var DISSENTER_HOME_PAGE_URI = "https://dissenter.com";
 var BASE_URI = 'https://dissenter.com/discussion/begin-extension?url=';
 var COMMENT_COUNT_URI = "https://dissenter.com/notification/comment-count?url=";
 

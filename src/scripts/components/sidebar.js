@@ -27,7 +27,12 @@ var Sidebar = function() {
      */
     scope.onSidebarOpen = function(activeTab) {
         //Must be object
-        if (!isObject(activeTab)) return false;
+        if (!isObject(activeTab)) {
+            //Set default
+            iframe.setAttribute('src', DISSENTER_HOME_PAGE_URI);
+            scope.toggleLoading(false);
+            return;
+        }
 
         //Get url
         var url = activeTab['url'] || '';
@@ -44,6 +49,12 @@ var Sidebar = function() {
         //Encode current tab url along with base dissenter.com url
         var encoded = encodeURIComponent(url);
         var commentUrl = BASE_URI + encoded;
+
+        //Url must contain ://, set home page iframe if not
+        if (url.indexOf('://') == -1) {
+            commentUrl = DISSENTER_HOME_PAGE_URI;
+        }
+
         //Set src
         iframe.setAttribute('src', commentUrl);
 
