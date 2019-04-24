@@ -105,6 +105,12 @@ __BROWSER__.runtime.onMessage.addListener(function(message, sender, sendResponse
             return true;
         }
 
+        //Must be valid url
+        if (url.indexOf('://') == -1) {
+            setExtensionIconBadge('');
+            return true;
+        }
+
         //
         var fetchUrl = COMMENT_COUNT_URI + encodeURIComponent(url);
 
