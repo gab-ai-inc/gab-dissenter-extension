@@ -152,13 +152,14 @@ html {
     &__items {
         display: inline-block;
         float: right;
-        max-width: 260px;
+        width: 260px;
 
         &--full {
             display: block;
             width: 100%;
             float: none;
             margin-top: 15px;
+            max-width: none;
         }
     }
     @media (min-width:0) and (max-width:960px) {
@@ -185,6 +186,7 @@ html {
     display: block;
     margin-bottom: 10px;
     cursor: pointer;
+    line-height: 2;
 
     &__title {
         display: block;
