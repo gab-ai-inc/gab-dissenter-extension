@@ -45,23 +45,33 @@ var GDDisqus = function() {
         container.style.setProperty("overflow", 'hidden', "important");
         container.style.setProperty("box-sizing", 'border-box', "important");
 
+        var svg = getDissenterDLogoAsSVG("18px", "18px", "#fff", COLOR_GAB_GREEN)
+        svg.style.setProperty("display", 'inline-block', "important");
+        svg.style.setProperty("vertical-align", 'middle', "important");
+        svg.style.setProperty("margin-left", '8px', "important");
+
         //Create button with same general style as "Subscribe" button but with new Gab Dissenter styles
         var button = document.createElement("a");
-        button.textContent = "View Comments on Dissenter";
         button.style.setProperty("display", 'block', "important");
         button.style.setProperty("width", '100%', "important");
         button.style.setProperty("height", '40px', "important");
         button.style.setProperty("background-color", COLOR_GAB_GREEN, "important");
-        button.style.setProperty("color", '#fff', "important");
         button.style.setProperty("border-radius", '4px', "important");
         button.style.setProperty("text-align", 'center', "important");
         button.style.setProperty("margin", '0 auto', "important");
-        button.style.setProperty("line-height", '40px', "important");
-        button.style.setProperty("font-size", '14px', "important");
         button.style.setProperty("box-sizing", 'border-box', "important");
         button.style.setProperty("cursor", 'pointer', "important");
 
+        //Create button with same general style as "Subscribe" button but with new Gab Dissenter styles
+        var span = document.createElement("a");
+        span.textContent = "View Comments on Dissenter";
+        span.style.setProperty("color", '#fff', "important");
+        span.style.setProperty("line-height", '40px', "important");
+        span.style.setProperty("font-size", '14px', "important");
+
         //Append
+        button.appendChild(span);
+        button.appendChild(svg);
         container.appendChild(button);
 
         //Return container
