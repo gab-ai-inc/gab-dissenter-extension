@@ -99,3 +99,18 @@ function getDissenterDLogoAsSVG(height, width, fillColor, backgroundColor) {
     return svg;
 };
 
+function addManyClasses(elem, classes) {
+    if (!isArray(classes)) return false;
+
+    for (var i = 0, length = classes.length; i < length; i++) {
+        elem.classList.add(classes[i]);
+    };
+};
+
+function removeManyClasses(elem, classes) {
+    if (!isArray(classes)) return false;
+    
+    for (var i = 0, length = classes.length; i < length; i++) {
+      elem.classList.remove(classes[i]);
+  };
+};
