@@ -45,6 +45,10 @@ module.exports = manifest = {
             "js": ["content/reddit/script/script.js"]
         },
         {
+            "matches": ["https://*.wikipedia.org/*"],
+            "js": ["content/wikipedia/script/script.js"]
+        },
+        {
             "matches": [
                 "http://*/*",
                 "https://*/*"
