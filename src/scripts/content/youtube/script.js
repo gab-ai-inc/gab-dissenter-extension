@@ -45,26 +45,41 @@ var GDYoutube = function() {
         //Create container to match the "Subscribe" button container
         var container = document.createElement("div");
         container.style.setProperty("display", 'inline-block', "important");
-        container.style.setProperty("width", '120px', "important");
+        container.style.setProperty("width", '140px', "important");
         container.style.setProperty("height", '50px', "important");
         container.style.setProperty("padding", '7px', "important");
         container.style.setProperty("overflow", 'hidden', "important");
         container.style.setProperty("box-sizing", 'border-box', "important");
 
+        var svg = getDissenterDLogoAsSVG("18px", "18px", "#fff", COLOR_GAB_GREEN)
+        svg.style.setProperty("display", 'inline-block', "important");
+        svg.style.setProperty("vertical-align", 'middle', "important");
+        svg.style.setProperty("margin-right", '8px', "important");
+
         //Create button with same general style as "Subscribe" button but with new Gab Dissenter styles
         var button = document.createElement("a");
-        button.textContent = "Dissent This";
         button.style.setProperty("display", 'inline-block', "important");
         button.style.setProperty("width", '100%', "important");
         button.style.setProperty("height", '100%', "important");
         button.style.setProperty("padding", '10px', "important");
         button.style.setProperty("background-color", COLOR_GAB_GREEN, "important");
-        button.style.setProperty("color", '#fff', "important");
         button.style.setProperty("border-radius", '2px', "important");
         button.style.setProperty("text-align", 'center', "important");
-        button.style.setProperty("font-size", '14px', "important");
         button.style.setProperty("box-sizing", 'border-box', "important");
         button.style.setProperty("cursor", 'pointer', "important");
+
+        var span = document.createElement("span");
+        span.textContent = "Dissent This";
+        span.style.setProperty("display", 'inline-block', "important");
+        span.style.setProperty("color", '#fff', "important");
+        span.style.setProperty("text-align", 'left', "important");
+        span.style.setProperty("font-size", '14px', "important");
+        span.style.setProperty("box-sizing", 'border-box', "important");
+        span.style.setProperty("vertical-align", 'top', "important");
+        span.style.setProperty("line-height", '17px', "important");
+
+        button.appendChild(svg);
+        button.appendChild(span);
 
         //Append
         container.appendChild(button);
