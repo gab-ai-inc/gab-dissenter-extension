@@ -8,98 +8,50 @@ var Options = function() {
 
     //
 
-    //Elements
-    var twitterCheckbox = document.getElementById('twitter-enabled');
-    var redditCheckbox = document.getElementById('reddit-enabled');
-    var youtubeCheckbox = document.getElementById('youtube-enabled');
-    var windowSidebarCheckbox = document.getElementById('window-sidebar-enabled');
-    var commentBadgeCheckbox = document.getElementById('comment-badge-enabled');
-    var disqusDissentCheckbox = document.getElementById('disqus-dissent-enabled');
-
-    //Listeners
-
-    /**
-     * @description - On twitter enabled
-     */
-    twitterCheckbox.onchange = function() {
-        var value = this.checked;
-
-        //Send message
-        __BROWSER__.runtime.sendMessage({
-            action: BACKGROUND_ACTION_SET_KEY,
+    var checkboxData = [
+        {
+            element: document.getElementById('twitter-enabled'),
             key: TWITTER_BUTTONS_ENABLED,
-            value: value
-        });
-    };
-
-    /**
-     * @description - On reddit enabled
-     */
-    redditCheckbox.onchange = function() {
-        var value = this.checked;
-
-        //Send message
-        __BROWSER__.runtime.sendMessage({
-            action: BACKGROUND_ACTION_SET_KEY,
+        },
+        {
+            element: document.getElementById('reddit-enabled'),
             key: REDDIT_BUTTONS_ENABLED,
-            value: value
-        });
-    };
-
-    /**
-     * @description - On youtube enabled
-     */
-    youtubeCheckbox.onchange = function() {
-        var value = this.checked;
-
-        //Send message
-        __BROWSER__.runtime.sendMessage({
-            action: BACKGROUND_ACTION_SET_KEY,
+        },
+        {
+            element: document.getElementById('youtube-enabled'),
             key: YOUTUBE_BUTTONS_ENABLED,
-            value: value
-        });
-    };
-
-    /**
-     * @description - Sidebar window checkbox
-     */
-    windowSidebarCheckbox.onchange = function() {
-        var value = this.checked;
-
-        //Send message
-        __BROWSER__.runtime.sendMessage({
-            action: BACKGROUND_ACTION_SET_KEY,
+        },
+        {
+            element: document.getElementById('window-sidebar-enabled'),
             key: WINDOW_SIDEBAR_UNAVAILABLE_ENABLED,
-            value: value
-        });
-    };
-
-    /**
-     * @description - Comment badge checkbox
-     */
-    commentBadgeCheckbox.onchange = function() {
-        var value = this.checked;
-
-        //Send message
-        __BROWSER__.runtime.sendMessage({
-            action: BACKGROUND_ACTION_SET_KEY,
+        },
+        {
+            element: document.getElementById('comment-badge-enabled'),
             key: WEBSITE_COMMENT_BADGE_ENABLED,
-            value: value
-        });
-    };
+        },
+        {
+            element: document.getElementById('disqus-dissent-enabled'),
+            key: DISSENT_DISQUS_BUTTONS_ENABLED,
+        },
+        {
+            element: document.getElementById('wikipedia-enabled'),
+            key: WIKIPEDIA_BUTTONS_ENABLED,
+        }
+    ];
 
-    /**
-     * @description - Dissent button above any disqus thread
-     */
-    disqusDissentCheckbox.onchange = function() {
-        var value = this.checked;
-
+    function setKeyValue(checkboxBlock) {
         //Send message
         __BROWSER__.runtime.sendMessage({
             action: BACKGROUND_ACTION_SET_KEY,
-            key: DISSENT_DISQUS_BUTTONS_ENABLED,
-            value: value
+            key: checkboxBlock.key,
+            value: checkboxBlock.element.checked
         });
+    };
+
+    for (var i = 0; i < checkboxData.length; i++) {
+        var checkboxBlock = checkboxData[i];
+        var key = checkboxBlock.key;
+        checkboxBlock.element.onchange = setKeyValue.bind(null, checkboxBlock);
     };
 
     //Global functions
@@ -116,13 +68,9 @@ var Options = function() {
         }, function(data) {
             if (!data) return false;
 
-            //Set checkboxes for enabled values
-            twitterCheckbox.checked = data[TWITTER_BUTTONS_ENABLED];
-            redditCheckbox.checked = data[REDDIT_BUTTONS_ENABLED];
-            youtubeCheckbox.checked = data[YOUTUBE_BUTTONS_ENABLED];
-            windowSidebarCheckbox.checked = data[WINDOW_SIDEBAR_UNAVAILABLE_ENABLED];
-            commentBadgeCheckbox.checked = data[WEBSITE_COMMENT_BADGE_ENABLED];
-            disqusDissentCheckbox.checked = data[DISSENT_DISQUS_BUTTONS_ENABLED];
+            for (var i = 0; i < checkboxData.length; i++) {
+                checkboxData[i].element.checked = data[checkboxData[i].key];
+            };
         });
     };
 };
