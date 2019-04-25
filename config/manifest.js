@@ -58,9 +58,6 @@ module.exports = manifest = {
     ],
     "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self' https://*.dissenter.com/*",
     "incognito": "spanning",
-    "chrome_url_overrides": {
-        "newtab": "newtab/newtab.html"
-    },
     "optional_permissions": [
         "topSites"
     ]
