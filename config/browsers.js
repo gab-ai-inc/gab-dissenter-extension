@@ -17,6 +17,9 @@ const chrome = new Browser({
         "version": "0.1.5",
         "options_page": "options/options.html",
         "update_url": "https://dissenter.com/dist/extensions/updates/chrome/manifest.xml",
+        "omnibox": {
+            "keyword" : "dissent"
+        },
     },
 });
 
@@ -45,6 +48,9 @@ const firefox = new Browser({
             "https://*.dissenter.com/*",
         ],
         "update_url": "https://dissenter.com/dist/extensions/updates/firefox/manifest.json",
+        "omnibox": {
+            "keyword" : "dissent"
+        },
     },
 });
 
