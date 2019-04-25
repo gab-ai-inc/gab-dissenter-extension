@@ -4,6 +4,10 @@ This repository holds the Dissenter Browser Extension code that is used to gener
 
 For more information, please visit: https://dissenter.com
 
+# • Download the Dissenter Browser Extension
+
+Please head over to https://dissenter.com/download to download the extension for your specific browser and view detailed installation instructions.
+
 # • Installation
 
 Latest versions:
