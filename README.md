@@ -14,10 +14,10 @@ Latest versions:
 
 | Browser | Version |
 | --- | --- |
-Chrome | v0.1.5 |
-Edge | v0.1.5 |
-Firefox | v0.1.5 |
-Safari | v0.1.4 |
+Chrome | v0.1.6 |
+Edge | v0.1.6 |
+Firefox | v0.1.7 |
+Safari | v0.1.5 |
 
 This extension only requires developer dependencies.
 
