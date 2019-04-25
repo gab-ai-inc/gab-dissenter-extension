@@ -47,8 +47,14 @@ var DissenterNotifications = function() {
     };
 
     function setBadge() {
-        if (newNotiCount > 0) notificationTabBtn.setAttribute("data-badge", newNotiCount);
-        else notificationTabBtn.removeAttribute("data-badge");
+        if (newNotiCount > 0) {
+            notificationTabBtn.setAttribute("data-badge", newNotiCount);
+            notificationTabBtn.classList.add("has-badge");
+        }
+        else {
+            notificationTabBtn.removeAttribute("data-badge");
+            notificationTabBtn.classList.remove("has-badge");
+        }
     };
 
     function getDissenterNotification(notiBlock) {
