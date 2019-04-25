@@ -66,7 +66,10 @@ gulp.task('styles', function() {
 
         promises.push(getPromise('popup', browser.path));
         if (browser.slug === 'firefox') promises.push(getPromise('sidebar', browser.path));
-        if (browser.slug !== 'safari') promises.push(getPromise('options', browser.path));
+        if (browser.slug !== 'safari') {
+            promises.push(getPromise('options', browser.path));
+            promises.push(getPromise('newtab', browser.path));
+        }
     };
 
     return Promise.all(promises);
@@ -161,6 +164,7 @@ gulp.task('scripts', () => {
             promises.push(getPromise('script', 'src/scripts/content/wikipedia/**', browser, 'content/wikipedia'));
             promises.push(getPromise('script', 'src/scripts/content/all/**', browser, 'content/all'));
             promises.push(getPromise('background', 'src/scripts/background/**', browser));
+            promises.push(getPromise('newtab', 'src/scripts/newtab/**', browser));
         }
         if (browser.slug === 'firefox') promises.push(getPromise('sidebar', 'src/scripts/components/sidebar.js', browser));
     };
@@ -256,6 +260,7 @@ gulp.task('html', () => {
         if (browser.slug !== 'safari') {
             promises.push(getPromise('background', browser));
             promises.push(getPromise('options', browser));
+            promises.push(getPromise('newtab', browser));
         }
         if (browser.slug === 'firefox') promises.push(getPromise('sidebar', browser));
     };
