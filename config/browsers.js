@@ -20,6 +20,10 @@ const chrome = new Browser({
         "omnibox": {
             "keyword" : "dissent"
         },
+        "optional_permissions": [
+            "topSites",
+            "tabs",
+        ],
     },
 });
 
