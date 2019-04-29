@@ -61,6 +61,8 @@ if (BROWSER_CONFIG.slug !== "edge") {
         if (!newTabEnabled) return false;
 
         if ((BROWSER_CONFIG.slug === "chrome" && tab.url === "chrome://newtab/") ||
+            (BROWSER_CONFIG.slug === "chrome" && tab.url.indexOf("chrome://vivaldi-webui/startpage") > -1) || //vivaldi
+            (BROWSER_CONFIG.slug === "chrome" && tab.url === "chrome://startpage/") || //opera
             (BROWSER_CONFIG.slug === "firefox" && tab.url === "about:newtab")) {
             chrome.tabs.update(tab.id, {
                 url: chrome.extension.getURL("newtab/newtab.html")
