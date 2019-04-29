@@ -20,9 +20,6 @@ const chrome = new Browser({
         "omnibox": {
             "keyword" : "dissent"
         },
-        "chrome_url_overrides": {
-            "newtab": "newtab/newtab.html"
-        },
     },
 });
 
@@ -53,9 +50,6 @@ const firefox = new Browser({
         "update_url": "https://dissenter.com/dist/extensions/updates/firefox/manifest.json",
         "omnibox": {
             "keyword" : "dissent"
-        },
-        "chrome_url_overrides": {
-            "newtab": "newtab/newtab.html"
         },
     },
 });
