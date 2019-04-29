@@ -32,6 +32,11 @@ var SEARCH_ENGINES = [
         icon: "startpage.png"
     },
     {
+        name: "Qwant",
+        url: "https://www.qwant.com/?q=",
+        icon: "qwant.svg"
+    },
+    {
         name: "Bing",
         url: "https://www.bing.com/search?q=",
         icon: "bing.svg"
