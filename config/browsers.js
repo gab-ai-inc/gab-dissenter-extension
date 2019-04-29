@@ -5,7 +5,7 @@ const Browser = require('./browser');
 const chrome = new Browser({
     name: 'Google Chrome',
     slug: 'chrome',
-    version: '0.1.7',
+    version: '0.1.8',
     scriptVariableMap: {
         BROWSER: 'chrome',
         MESSENGER: 'extension',
@@ -13,8 +13,8 @@ const chrome = new Browser({
     manifestMap: {
         "background.persistent": false,
         "offline_enabled": false,
-        "version_name": "0.1.7",
-        "version": "0.1.7",
+        "version_name": "0.1.8",
+        "version": "0.1.8",
         "options_page": "options/options.html",
         "update_url": "https://dissenter.com/dist/extensions/updates/chrome/manifest.xml",
         "omnibox": {
@@ -30,13 +30,13 @@ const chrome = new Browser({
 const firefox = new Browser({
     name: 'Mozilla Firefox',
     slug: 'firefox',
-    version: '0.1.8',
+    version: '0.1.9',
     scriptVariableMap: {
         BROWSER: 'browser',
         MESSENGER: 'runtime',
     },
     manifestMap: {
-        "version": "0.1.8",
+        "version": "0.1.9",
         "sidebar_action": {
             "default_title": "Dissenter",
             "default_panel": "sidebar/sidebar.html",
@@ -61,14 +61,14 @@ const firefox = new Browser({
 const edge = new Browser({
     name: 'Microsoft Edge',
     slug: 'edge',
-    version: '0.1.6',
+    version: '0.1.7',
     scriptVariableMap: {
         BROWSER: 'browser',
         MESSENGER: 'runtime',
     },
     manifestMap: {
         "background.persistent": false,
-        "version": "0.1.6",
+        "version": "0.1.7",
         "author": "Gab.com",
         "options_ui": {
             "page": "options/options.html",
@@ -85,7 +85,7 @@ const edge = new Browser({
 const safari = new Browser({
     name: 'Apple Safari',
     slug: 'safari',
-    version: '0.1.5',
+    version: '0.1.6',
     scriptVariableMap: {
         BROWSER: 'browser',
         CONTEXT_MENUS: 'menu',
