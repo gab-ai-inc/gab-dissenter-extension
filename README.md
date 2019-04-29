@@ -14,9 +14,9 @@ Latest versions:
 
 | Browser | Version |
 | --- | --- |
-Chrome | v0.1.6 |
+Chrome | v0.1.7 |
 Edge | v0.1.6 |
-Firefox | v0.1.7 |
+Firefox | v0.1.8 |
 Safari | v0.1.5 |
 
 This extension only requires developer dependencies.

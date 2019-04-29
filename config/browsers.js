@@ -5,7 +5,7 @@ const Browser = require('./browser');
 const chrome = new Browser({
     name: 'Google Chrome',
     slug: 'chrome',
-    version: '0.1.6',
+    version: '0.1.7',
     scriptVariableMap: {
         BROWSER: 'chrome',
         MESSENGER: 'extension',
@@ -13,8 +13,8 @@ const chrome = new Browser({
     manifestMap: {
         "background.persistent": false,
         "offline_enabled": false,
-        "version_name": "0.1.6",
-        "version": "0.1.6",
+        "version_name": "0.1.7",
+        "version": "0.1.7",
         "options_page": "options/options.html",
         "update_url": "https://dissenter.com/dist/extensions/updates/chrome/manifest.xml",
         "omnibox": {
@@ -26,13 +26,13 @@ const chrome = new Browser({
 const firefox = new Browser({
     name: 'Mozilla Firefox',
     slug: 'firefox',
-    version: '0.1.7',
+    version: '0.1.8',
     scriptVariableMap: {
         BROWSER: 'browser',
         MESSENGER: 'runtime',
     },
     manifestMap: {
-        "version": "0.1.7",
+        "version": "0.1.8",
         "sidebar_action": {
             "default_title": "Dissenter",
             "default_panel": "sidebar/sidebar.html",
