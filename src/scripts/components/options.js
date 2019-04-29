@@ -8,6 +8,10 @@ var Options = function() {
 
     //
 
+    var optionalPermissions = {
+        permissions: ["tabs"]
+    };
+
     var checkboxData = [
         {
             element: document.getElementById('twitter-enabled'),
@@ -36,10 +40,21 @@ var Options = function() {
         {
             element: document.getElementById('wikipedia-enabled'),
             key: WIKIPEDIA_BUTTONS_ENABLED,
+        },
+        {
+            element: document.getElementById('custom-new-tab-enabled'),
+            key: CUSTOM_NEW_TAB_ENABLED,
         }
     ];
 
     function setKeyValue(checkboxBlock) {
+        //If is new tab, request "tabs" permission
+        if (checkboxBlock.key === CUSTOM_NEW_TAB_ENABLED) {
+            __BROWSER__.permissions.request(optionalPermissions, function(granted) {
+                //
+            });
+        }
+
         //Send message
         __BROWSER__.runtime.sendMessage({
             action: BACKGROUND_ACTION_SET_KEY,
