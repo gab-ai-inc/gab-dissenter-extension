@@ -51,6 +51,22 @@ if (BROWSER_CONFIG.slug !== "edge") {
             __BROWSER__.tabs.create({ url: newURL });
         }
     });
+
+    /**
+     * @description - Tab function for onCreated
+     */
+    __BROWSER__.tabs.onCreated.addListener(function(tab) {
+        //Get/Send value
+        var newTabEnabled = gdes.getValue(CUSTOM_NEW_TAB_ENABLED);
+        if (!newTabEnabled) return false;
+
+        if ((BROWSER_CONFIG.slug === "chrome" && tab.url === "chrome://newtab/") ||
+            (BROWSER_CONFIG.slug === "firefox" && tab.url === "about:newtab")) {
+            chrome.tabs.update(tab.id, {
+                url: chrome.extension.getURL("newtab/newtab.html")
+            });
+        }
+    });
 }
 
 /**
