@@ -11,7 +11,6 @@ var Background = function() {
 
     var colorSchemes = ["cs--black", "cs--white", "cs--light-grey", "cs--dark-grey"];
 
-    var DAILY_RANDOM_WALLPAPER_URL = "url(https://source.unsplash.com/daily?wallpaper)";
     var HEX_VALUES = ["0","1","2","3","4","5","6","7","8","9","a","b","c","d","e"];
 
 
@@ -25,15 +24,9 @@ var Background = function() {
     function resetBackgroundImage() {
         metaBackgroundImageBox.src = "";
 
-        //If background is random, set it
-        if (newTab.userDefaults[NT_BACKGROUND_RANDOM]) {
-            mainImage.classList.toggle("hidden", false);
-            mainImage.style.setProperty("background-image", DAILY_RANDOM_WALLPAPER_URL, "important");
-        }
-        else {
-            mainImage.classList.toggle("hidden", true);
-            mainImage.style.removeProperty("background-image");
-        }
+
+        mainImage.classList.toggle("hidden", true);
+        mainImage.style.removeProperty("background-image");
     };
 
     function getRandomHex() {
@@ -57,40 +50,6 @@ var Background = function() {
     };
 
     //
-
-    scope.setBackgroundRandom = function(event) {
-        if (!isObject(event)) return false;
-
-        var enabled = event.detail;
-
-        mainImage.classList.toggle("hidden", !enabled);
-
-        if (enabled) {
-            metaBackgroundImageBox.src = "";
-            mainImage.style.setProperty("background-image", DAILY_RANDOM_WALLPAPER_URL, "important");
-
-            //Reset background solid color, image
-            var event1 = new CustomEvent("WELM_update_settings_item", {
-                detail: {
-                    key: NT_BACKGROUND_IMAGE,
-                    value: null,
-                    updateInRuntime: true,
-                    updateInput: true
-                }
-            });
-            window.dispatchEvent(event1);
-
-            var event2 = new CustomEvent("WELM_update_settings_item", {
-                detail: {
-                    key: NT_BACKGROUND_SOLID_COLOR,
-                    value: null,
-                    updateInRuntime: true,
-                    updateInput: true
-                }
-            });
-            window.dispatchEvent(event2);
-        }
-    };
 
     scope.setBackgroundSolidColor = function(event) {
         if (!isObject(event)) return false;
@@ -135,17 +94,7 @@ var Background = function() {
             mainImage.style.setProperty("background-image", bgImg, "important");
             metaBackgroundImageBox.src = imageData;
 
-            //Reset background solid color, random daily
-            var event1 = new CustomEvent("WELM_update_settings_item", {
-                detail: {
-                    key: NT_BACKGROUND_RANDOM,
-                    value: false,
-                    updateInRuntime: true,
-                    updateInput: true
-                }
-            });
-            window.dispatchEvent(event1);
-
+            //Reset background solid color
             var event2 = new CustomEvent("WELM_update_settings_item", {
                 detail: {
                     key: NT_BACKGROUND_SOLID_COLOR,
@@ -173,7 +122,6 @@ var Background = function() {
 
     //
 
-    window.addEventListener("WELM_nt_background_random", scope.setBackgroundRandom, false);
     window.addEventListener("WELM_nt_background_solid_color", scope.setBackgroundSolidColor, false);
     window.addEventListener("WELM_nt_background_image", scope.setBackgroundImage, false);
     window.addEventListener("WELM_nt_colors_text", scope.setPageColorScheme, false);
