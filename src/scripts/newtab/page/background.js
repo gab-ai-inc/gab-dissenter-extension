@@ -102,8 +102,8 @@ var Background = function() {
         }
         else {
             mainImage.classList.add("hidden");
-            content.style.setProperty("background-color", color, "important");
             content.style.removeProperty("background");
+            content.style.setProperty("background-color", color, "important");
         }
     };
 
