@@ -49,6 +49,9 @@ var TopSites = function() {
             return false;
         }
 
+        //If not enabled, ignore
+        if (!__BROWSER__.topSites) return false;
+
         __BROWSER__.topSites.get(function(topSites) {
             reset();
 
