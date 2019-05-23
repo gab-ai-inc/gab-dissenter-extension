@@ -105,9 +105,65 @@ var GDYoutube = function() {
         });
     };
 
+    // todo: possibly setup a utils folder for browser-side functions
+    // remove element from dom
+    Element.prototype.remove = function() {
+        this.parentElement.removeChild(this);
+    };
+
+    // add element to dom before given element
+    Element.prototype.appendBefore = function (element) {
+        element.parentNode.insertBefore(this, element);
+    }, false;
+
+
+  // add element to dom after given element
+    Element.prototype.appendAfter = function(element) {
+        element.parentNode.insertBefore(this, element.nextSibling);
+    }, false;
+
+    /**
+    * @description - Adds a Dissenter comment section to the bottom of every YouTube video
+    * @function addCommentSection
+    */
+    function addCommentSection(){
+
+        // check if a comment iframe already exists
+        var alreadyExistingElement = document.getElementsByClassName('existing-iframe')
+
+        // delete the comment iframe if it already exists
+        if(alreadyExistingElement && alreadyExistingElement[0]){
+          alreadyExistingElement[0].remove();
+        }
+
+        // dissenter address to append current url to
+        var BASE_URI = 'https://dissenter.com/discussion/begin-extension?url=';
+
+        // current browser url
+        var url = window.location.href;
+
+        // url encode current url
+        var encoded = encodeURIComponent(url);
+
+        // build url encoded link to dissenter
+        var commentUrl = BASE_URI + encoded;
+
+        // create a new iframe
+        var commentsIframe = document.createElement('iframe');
+        commentsIframe.src = commentUrl;
+        commentsIframe.className = 'popup__iframe abs existing-iframe';
+        commentsIframe.id = 'popup-iframe';
+        commentsIframe.style.height = '500px';
+        commentsIframe.style.width = '100%';
+
+        // div to stick iframe in after, currently start of youtube comments
+        var youtubeCommentsDiv = document.getElementsByTagName("ytd-comments")
+
+        /* Add NewElement BEFORE -OR- AFTER Using the Aforementioned Prototypes */
+        commentsIframe.appendBefore(youtubeCommentsDiv[0]);
+    }
 
     //Global functions
-
 
     /**
      * @description - Init script on open
@@ -115,6 +171,11 @@ var GDYoutube = function() {
      */
     scope.init = function() {
         fetchElements();
+
+        // add a comment section to every youtube video
+        addCommentSection();
+        window.addEventListener("spfdone", addCommentSection); // old youtube design
+        window.addEventListener("yt-navigate-start", addCommentSection); // new youtube design
     };
 };
 
