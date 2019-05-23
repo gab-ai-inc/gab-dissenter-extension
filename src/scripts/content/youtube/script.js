@@ -105,9 +105,55 @@ var GDYoutube = function() {
         });
     };
 
+    /**
+    * @description - Adds a Dissenter comment section to the bottom of every YouTube video
+    * @function addCommentSection
+    */
+    function addCommentSection(){
+
+        Element.prototype.remove = function() {
+          this.parentElement.removeChild(this);
+        };
+
+        var alreadyExistingElement = document.getElementsByClassName('existing-iframe')
+
+        if(alreadyExistingElement && alreadyExistingElement[0]){
+          alreadyExistingElement[0].remove();
+        }
+
+        var BASE_URI = 'https://dissenter.com/discussion/begin-extension?url=';
+
+        var url = window.location.href;
+        var encoded = encodeURIComponent(url);
+
+        var commentUrl = BASE_URI + encoded;
+        console.log(commentUrl);
+
+          /* Typical Creation and Setup A New Orphaned Element Object */
+        var NewElement = document.createElement('iframe');
+        NewElement.src = commentUrl;
+        NewElement.className = 'popup__iframe abs existing-iframe';
+        NewElement.id = 'popup-iframe';
+        NewElement.style.height = '500px';
+        NewElement.style.width = '100%';
+
+        var youtubeCommentsDiv = document.getElementsByTagName("ytd-comments")
+
+        Element.prototype.appendBefore = function (element) {
+          element.parentNode.insertBefore(this, element);
+        },false;
+
+
+          /* Adds Element AFTER NeighborElement */
+        Element.prototype.appendAfter = function(element) {
+          element.parentNode.insertBefore(this, element.nextSibling);
+        }, false;
+
+          /* Add NewElement BEFORE -OR- AFTER Using the Aforementioned Prototypes */
+        NewElement.appendBefore(youtubeCommentsDiv[0]);
+    }
 
     //Global functions
-
 
     /**
      * @description - Init script on open
@@ -115,6 +161,11 @@ var GDYoutube = function() {
      */
     scope.init = function() {
         fetchElements();
+
+        // add a comment section to every youtube video
+        addCommentSection();
+        window.addEventListener("spfdone", addCommentSection); // old youtube design
+        window.addEventListener("yt-navigate-start", addCommentSection); // new youtube design
     };
 };
 
