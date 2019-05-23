@@ -105,6 +105,41 @@ var GDYoutube = function() {
         });
     };
 
+    /**
+     * @description - Hides limited state element and begins restricted video automatically
+     * @function unrestrictIfNeeded
+     */
+    function unrestrictIfNeeded(){
+
+        // hide limited state element
+        var limitedStateElem = document.getElementById('limited-state');
+        limitedStateElem.style.display = 'none';
+
+        // get all anchor tags to check if this is a restricted video
+        var formattedStrings = document.getElementsByTagName("yt-formatted-string");
+
+        // youtube restricted video text used to check against
+        var searchText = "I understand and wish to proceed";
+
+        // search text not matched by default
+        var matchedFormattedString = false;
+
+        // loop through anchors and see if restricted anchor exists
+        for (var i = 0; i < formattedStrings.length; i++) {
+          if (formattedStrings[i].textContent == searchText) {
+            matchedFormattedString = formattedStrings[i];
+            break;
+          }
+        }
+
+        // if formatted string matched, go two elements up and click the anchor link
+        if(matchedFormattedString){
+          matchedFormattedString.parentNode.parentNode.click()
+        }
+    }
+
+
+
 
     //Global functions
 
