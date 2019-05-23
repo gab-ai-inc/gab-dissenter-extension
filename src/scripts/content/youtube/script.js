@@ -6,7 +6,7 @@ var GDYoutube = function() {
     var scope = this;
 
     /**
-     * @description - Finds top bar, appends dissent button next to subscribe buton
+     * @description - Finds top bar, appends dissent button next to subscribe button
      * @function fetchElements
      * @return {Boolean} success
      */
@@ -105,40 +105,61 @@ var GDYoutube = function() {
         });
     };
 
+
     /**
-     * @description - Hides limited state element and begins restricted video automatically
-     * @function unrestrictIfNeeded
-     */
-    function unrestrictIfNeeded(){
+    * @description - Hides limited state element and begins restricted video automatically
+    * @function unrestrictIfNeeded
+    */
+    function unrestrictIfNeeded(timesTried){
+        // try three times before concluding it's not restricted
+        timesTried = timesTried || 0 ;
 
-        // hide limited state element
+        console.log(timesTried);
+        if(timesTried == 3){
+          return false
+        }
+
+        // hide limited state element if it exists
         var limitedStateElem = document.getElementById('limited-state');
-        limitedStateElem.style.display = 'none';
+        if(limitedStateElem){
+          limitedStateElem.style.display = 'none';
+        }
 
-        // get all anchor tags to check if this is a restricted video
-        var formattedStrings = document.getElementsByTagName("yt-formatted-string");
+        // wait 1s intervals for dom to build
+        setTimeout(function(){
+          // get all anchor tags to check if this is a restricted video
+          var formattedStrings = document.getElementsByTagName("yt-formatted-string");
 
-        // youtube restricted video text used to check against
-        var searchText = "I understand and wish to proceed";
+          // youtube restricted video text used to check against
+          var searchText = "I understand and wish to proceed";
 
-        // search text not matched by default
-        var matchedFormattedString = false;
+          // search text not matched by default
+          var matchedFormattedString = false;
 
-        // loop through anchors and see if restricted anchor exists
-        for (var i = 0; i < formattedStrings.length; i++) {
-          if (formattedStrings[i].textContent == searchText) {
-            matchedFormattedString = formattedStrings[i];
-            break;
+          // loop through anchors and see if restricted anchor exists
+          for (var i = 0; i < formattedStrings.length; i++) {
+            if (formattedStrings[i].textContent == searchText) {
+              matchedFormattedString = formattedStrings[i];
+              break;
+            }
           }
-        }
 
-        // if formatted string matched, go two elements up and click the anchor link
-        if(matchedFormattedString){
-          matchedFormattedString.parentNode.parentNode.click()
-        }
+          // if formatted string matched, go two elements up and click the anchor link
+          if(matchedFormattedString){
+            console.log('Restricted video, unrestricting');
+            matchedFormattedString.parentNode.parentNode.click()
+            return true
+          } else {
+            console.log('No need to unrestrict video');
+
+            // increment times tried and try again
+            timesTried++;
+            unrestrictIfNeeded(timesTried);
+            return false
+          }
+        }, 1000);
+
     }
-
-
 
 
     //Global functions
@@ -149,7 +170,13 @@ var GDYoutube = function() {
      * @function scope.init
      */
     scope.init = function() {
+        // add dissenter button next to subscribe button
         fetchElements();
+
+        // unrestrict videos on initial page load and then for custom youtube navigation events
+        unrestrictIfNeeded();
+        window.addEventListener("spfdone", unrestrictIfNeeded); // old youtube design
+        window.addEventListener("yt-navigate-start", unrestrictIfNeeded); // new youtube design
     };
 };
 
