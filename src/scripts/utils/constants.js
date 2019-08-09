@@ -22,6 +22,11 @@ var COLOR_GAB_GREEN = '#21cf7b';
 /* SEARCH ENGINES */
 var SEARCH_ENGINES = [
     {
+        name: "Anonymize",
+        url: "https://search.anonymize.com?q=",
+        icon: "anonymize.svg"
+    }
+    {
         name: "DuckDuckGo",
         url: "https://duckduckgo.com/?q=",
         icon: "duckduckgo.svg"
