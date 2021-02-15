@@ -6,7 +6,7 @@ For more information, please visit: https://dissenter.com
 
 # • Download the Dissenter Browser Extension
 
-Please head over to https://dissenter.com/download to download the extension for your specific browser and view detailed installation instructions.
+Please visit https://github.com/gab-ai-inc/gab-dissenter-extension/releases to download the extension for your specific browser.
 
 # • Installation
 
