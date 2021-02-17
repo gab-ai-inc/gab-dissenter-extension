@@ -63,7 +63,7 @@ const edge = new Browser({
     slug: 'edge',
     version: '0.1.8',
     scriptVariableMap: {
-        BROWSER: 'browser',
+        BROWSER: 'chrome',
         MESSENGER: 'runtime',
     },
     manifestMap: {
